@@ -20,7 +20,7 @@ public class MyMap extends JPanel implements KeyListener {
     public static void main(String[] args) {
         MyMap p = new MyMap();
         JFrame fr = new JFrame();
-        fr.setSize(xSize, ySize);
+        fr.setSize(xSize/2, ySize);
         fr.add(p);
         fr.addKeyListener(p);
         fr.setVisible(true);
