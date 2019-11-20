@@ -1,25 +1,9 @@
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import static java.awt.BorderLayout.SOUTH;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.text.AttributedCharacterIterator;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 
 public class MyMap extends JPanel implements KeyListener {
@@ -39,7 +23,21 @@ public class MyMap extends JPanel implements KeyListener {
         lb.setFont(new Font("Dialog", Font.BOLD, 70));
         p.add(lb);
         fr.add(p);
-        
+        JTextField txt1 = new JTextField(10);
+        JPanel p1 = new JPanel();
+        JPanel p2 = new JPanel();
+        JPanel p3 = new JPanel();
+        JPanel p4 = new JPanel();
+
+        p.setPreferredSize(new Dimension(700,700));
+
+        //set layout
+        p1.setLayout(new FlowLayout());
+        p1.add(txt1);
+
+        fr.add(p,BorderLayout.CENTER);
+        fr.add(p1,BorderLayout.SOUTH);
+
         fr.addKeyListener(p);
         
         
