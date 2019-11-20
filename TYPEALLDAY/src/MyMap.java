@@ -50,9 +50,9 @@ public class MyMap extends JPanel implements KeyListener {
         }
 
     public void paintComponent(Graphics g) {
-        Image bg = new ImageIcon("src/images/bg.png").getImage();
-        Image oong_b = new ImageIcon("src/images/sprite_oong-1.gif").getImage();
-        Image oong_w = new ImageIcon("src/images/Sprite_oong_white-1.gif").getImage();
+        Image bg = new ImageIcon("src/images/bg_2.jpg").getImage();
+        Image oong_b = new ImageIcon("src/images/sprite_oong.gif").getImage();
+        Image oong_w = new ImageIcon("src/images/sprite_white_oong0.png").getImage();
         g.drawImage(bg, 0, 0, this);
         g.drawImage(oong_b, 900,370, this);
         g.drawImage(oong_w, 0, 380, this);
