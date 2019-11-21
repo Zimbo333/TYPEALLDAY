@@ -41,12 +41,13 @@ public class Menu extends JPanel {
         btn2 = new JButton(i3);
         btn3 = new JButton("Add");
 
-        p1.add(logo);
+        fr.add(lb_bg);
+        fr.add(logo);
         p1.add(btn1);
         p1.add(btn2);
-        fr.add(lb_bg);
-        
-        //fr.add(p1);
+
+        fr.add(p1);
+        logo.setBounds(300,300, 100, 100);
         fr.setLayout(new FlowLayout());
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fr.setLocationRelativeTo(null);
