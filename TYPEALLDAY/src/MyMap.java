@@ -9,28 +9,22 @@ import javax.swing.*;
 
 public class MyMap extends JPanel implements KeyListener {
 
-    public int px = 0, py = 0;
     static Toolkit tk = Toolkit.getDefaultToolkit();
-    static int xSize = ((int) tk.getScreenSize().getWidth());
-    static int ySize = ((int) tk.getScreenSize().getHeight());
-    static String[] backG = {"bg", "bg_1", "bg_2"};
+    static int xSize = ((int) tk.getScreenSize().getWidth()); //ขนาดความกว้างตามขนาดจอของเราแนวนอน
+    static int ySize = ((int) tk.getScreenSize().getHeight());//ขนาดความสูงตามขนาดจอของเราแนวตั้ง
+    static String[] backG = {"bg", "bg_1", "bg_2"}; //เอาไว้ random พื้นหลังตอนเปิดเกม
     static String[] oong = {"sprite_oong-1", "sprite_oong-2"};
-    static int i = getRandomNumberInRange(0, 2);
-    JDesktopPane dp = new JDesktopPane();
-    JPanel transparentPanel = new JPanel();
+    static int i = getRandomNumberInRange(0, 2); //เลขที่ได้จาการ Random
     public static void main(String[] args) {
         JFrame fr = new JFrame();
-        JPanel p = new JPanel();
-        JPanel p_1 = new JPanel();
-        JPanel p_2 = new JPanel();
-        ImageIcon bg = new ImageIcon("src/images/" + backG[i] + ".jpg");
-        ImageIcon oong_b = new ImageIcon("src/images/sprite_oong.gif");
-        ImageIcon oong_w = new ImageIcon("src/images/" + oong[getRandomNumberInRange(0,1)] + ".png");
-        JLabel img_oong_b = new JLabel(oong_b);
-        JLabel img_oong_w = new JLabel(oong_w);
-        JLabel bg_lb = new JLabel(bg);
+        ImageIcon bg = new ImageIcon("src/images/" + backG[i] + ".jpg"); //รูปพื้นหลังที่สุ่มเสร็จแล้วเอามาเก็บในตัวแปร
+        ImageIcon oong_b = new ImageIcon("src/images/sprite_oong.gif");//รูปอ๋องดำ
+        ImageIcon oong_w = new ImageIcon("src/images/" + oong[getRandomNumberInRange(0,1)] + ".png");//รูปอ๋องขาว
+        JLabel img_oong_b = new JLabel(oong_b);//เอารูปใส่JLabel
+        JLabel img_oong_w = new JLabel(oong_w);//เอารูปใส่JLabel
+        JLabel bg_lb = new JLabel(bg);//เอารูปใส่JLabel
         
-        fr.setSize((xSize/2)+300, (ySize/2)+200);
+        fr.setSize((xSize/2)+300, (ySize/2)+200);//จัดขนาดของwindow
         
         
         
@@ -47,8 +41,8 @@ public class MyMap extends JPanel implements KeyListener {
         fr.add(img_oong_b);
         fr.add(img_oong_w);
         fr.add(bg_lb);
-        img_oong_b.setBounds(900, 350, 150, 250);
-        img_oong_w.setBounds(50, 350, 150, 250);
+        img_oong_b.setBounds(900, 350, 150, 250);//จัดตำแหน่งรูปกับขนาด (x,y,w,h)
+        img_oong_w.setBounds(50, 350, 150, 250);//จัดตำแหน่งรูปกับขนาด (x,y,w,h)
         fr.add(p1,BorderLayout.SOUTH);
         
         
@@ -56,9 +50,9 @@ public class MyMap extends JPanel implements KeyListener {
         fr.setVisible(true);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fr.setResizable(false);
-        fr.setLocationRelativeTo(null);
+        fr.setLocationRelativeTo(null);//ทำให้ตอนรันโค้ดแล้วทำให้windowมาอยู่ตรงกลางจอ
         }
-        private static int getRandomNumberInRange(int min, int max) {
+        private static int getRandomNumberInRange(int min, int max) {//เอาไว้สุ่มเลข
         if (min >= max) {
             throw new IllegalArgumentException("max must be greater than min");
             
