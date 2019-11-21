@@ -49,8 +49,8 @@ public class Menu extends JPanel {
 
 //        fr.add(p1);
 
-        lb_bg.setBounds(0, 0, 500, 630);    //กำหนดตำแน่งและขนาด 
-        logo.setBounds(70, 70, 347, 159);   //กำหนดตำแน่งและขนาด
+        lb_bg.setBounds(0, 0, 500, 630);    //กำหนดตำแหน่งและขนาด 
+        logo.setBounds(70, 70, 347, 159);   //กำหนดตำแหน่งและขนาด
         
 //        p1.setBounds(630, 100, 500, 500);
 
