@@ -62,18 +62,6 @@ public class MyMap extends JPanel implements KeyListener {
         return r.nextInt((max - min) + 1) + min;
     }
 
-//    public void paintComponent(Graphics g) {
-//        Image bg = new ImageIcon("src/images/" + backG[i] + ".jpg").getImage();
-//        Image oong_b = new ImageIcon("src/images/sprite_oong.gif").getImage();
-//        Image oong_w = new ImageIcon("src/images/" + oong[getRandomNumberInRange(0,1)] + ".png").getImage();
-//        g.drawImage(bg, 0, 0, this);
-//        g.drawImage(oong_b, 900,370, this);
-//        g.drawImage(oong_w, 50, 370, this);
-////        g.drawString((AttributedCharacterIterator) lb, 430, 500);
-//        
-//        
-//    }
- 
     public void keyTyped(KeyEvent ke) {
     }
 
