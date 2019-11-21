@@ -41,17 +41,29 @@ public class Menu extends JPanel {
         btn2 = new JButton(i3);
         btn3 = new JButton("Add");
 
-        fr.add(lb_bg);
         fr.add(logo);
-        p1.add(btn1);
-        p1.add(btn2);
-
+        fr.add(btn1);
+        fr.add(btn2);
         fr.add(p1);
-        logo.setBounds(300,300, 100, 100);
-        fr.setLayout(new FlowLayout());
+        fr.add(lb_bg);
+
+//        fr.add(p1);
+        lb_bg.setBounds(0, 0, 500, 630);
+        logo.setBounds(70, 70, 347, 159);
+//        p1.setBounds(630, 100, 500, 500);
+        btn1.setBounds(100, 250, 251, 103);
+        btn2.setBounds(130, 375, 249, 97);
+//        fr.setLayout(new FlowLayout());
+        btn1.setBorder(BorderFactory.createEmptyBorder());
+        btn1.setContentAreaFilled(false);
+        
+        btn2.setBorder(BorderFactory.createEmptyBorder());
+        btn2.setContentAreaFilled(false);
+
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fr.setLocationRelativeTo(null);
         fr.setVisible(true);
+        fr.setResizable(false);
     }
 
     public void paintComponent(Graphics g) {
