@@ -24,8 +24,11 @@ public class Text implements KeyListener {
 
     public void init() {
         fr = new JFrame("test");
-        lb1 = new JLabel("text");
+        lb1 = new JLabel("tetetetetetetetetetet");
         lb2 = new JLabel();
+        JPanel p = new JPanel();
+        ImageIcon image = new ImageIcon("src/images/sprite_oong.gif");
+        JLabel label = new JLabel(image);
         lb1.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
         lb2.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
 
@@ -34,11 +37,14 @@ public class Text implements KeyListener {
 //        fr.setLayout(new BorderLayout());
         fr.add(lb1, BorderLayout.CENTER);
         fr.add(lb2, BorderLayout.SOUTH);
+        p.add(label);
+        fr.add(p, BorderLayout.WEST);
+
         fr.setVisible(true);
         fr.setSize(200, 200);
 
         fr.addKeyListener((KeyListener) this);
-
+        
     }
 
     public static void main(String[] args) {
