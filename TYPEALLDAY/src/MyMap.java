@@ -3,6 +3,7 @@ import java.awt.*;
 import static java.awt.BorderLayout.SOUTH;
 import java.awt.event.*;
 import java.text.AttributedCharacterIterator;
+import java.util.Random;
 import javax.swing.*;
 
 
@@ -13,7 +14,9 @@ public class MyMap extends JPanel implements KeyListener {
     static int xSize = ((int) tk.getScreenSize().getWidth());
     static int ySize = ((int) tk.getScreenSize().getHeight());
     static JLabel lb = new JLabel();
-    static String txt = "";
+    static String[] backG = {"bg", "bg_1", "bg_2"};
+    static String[] oong = {"sprite_oong-1", "sprite_oong-2"};
+    static int i = getRandomNumberInRange(0, 2);
     JDesktopPane dp = new JDesktopPane();
     JPanel transparentPanel = new JPanel();
     public static void main(String[] args) {
@@ -46,14 +49,23 @@ public class MyMap extends JPanel implements KeyListener {
         fr.setResizable(false);
         fr.setLocationRelativeTo(null);
         }
+        private static int getRandomNumberInRange(int min, int max) {
+        if (min >= max) {
+            throw new IllegalArgumentException("max must be greater than min");
+            
+        }
+
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
+    }
 
     public void paintComponent(Graphics g) {
-        Image bg = new ImageIcon("src/images/bg_2.jpg").getImage();
+        Image bg = new ImageIcon("src/images/" + backG[i] + ".jpg").getImage();
         Image oong_b = new ImageIcon("src/images/sprite_oong.gif").getImage();
-        Image oong_w = new ImageIcon("src/images/sprite_white_oong0.png").getImage();
+        Image oong_w = new ImageIcon("src/images/" + oong[getRandomNumberInRange(0,1)] + ".png").getImage();
         g.drawImage(bg, 0, 0, this);
         g.drawImage(oong_b, 900,370, this);
-        g.drawImage(oong_w, 0, 380, this);
+        g.drawImage(oong_w, 50, 370, this);
 //        g.drawString((AttributedCharacterIterator) lb, 430, 500);
         
         
@@ -76,3 +88,5 @@ public class MyMap extends JPanel implements KeyListener {
 
    
 }
+
+
