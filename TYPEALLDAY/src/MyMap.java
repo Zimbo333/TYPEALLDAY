@@ -4,9 +4,11 @@ import static java.awt.BorderLayout.SOUTH;
 import java.awt.event.*;
 import java.text.AttributedCharacterIterator;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
-public class MyMap extends JPanel implements KeyListener, Commons {
+public class MyMap extends JPanel implements KeyListener, Commons{
 
     static Toolkit tk = Toolkit.getDefaultToolkit();
     static int xSize = ((int) tk.getScreenSize().getWidth()); //ขนาดความกว้างตามขนาดจอของเราแนวนอน
@@ -14,12 +16,14 @@ public class MyMap extends JPanel implements KeyListener, Commons {
     static String[] backG = {"bg", "bg_1", "bg_2"}; //เอาไว้ random พื้นหลังตอนเปิดเกม
     static String[] oong = {"sprite_oong-1", "sprite_oong-2"};
     static int i = getRandomNumberInRange(0, 2); //เลขที่ได้จาการ Random
+    static int count, potX, potY;
+    static JLabel test = new JLabel("Hello");
 
     public static void main(String[] args) {
         JFrame fr = new JFrame();
         ImageIcon bg = new ImageIcon("src/images/" + backG[i] + ".jpg"); //รูปพื้นหลังที่สุ่มเสร็จแล้วเอามาเก็บในตัวแปร
         ImageIcon oong_b = new ImageIcon("src/images/sprite_oong.gif");//รูปอ๋องดำ
-        ImageIcon oong_w = new ImageIcon("src/images/" + oong[getRandomNumberInRange(0, 1)] + ".png");//รูปอ๋องขาว
+        ImageIcon oong_w = new ImageIcon("src/images/sprite_white_oong.gif");//รูปอ๋องขาว
         JLabel img_oong_b = new JLabel(oong_b);//เอารูปใส่JLabel
         JLabel img_oong_w = new JLabel(oong_w);//เอารูปใส่JLabel
         JLabel bg_lb = new JLabel(bg);//เอารูปใส่JLabel
@@ -46,6 +50,14 @@ public class MyMap extends JPanel implements KeyListener, Commons {
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fr.setResizable(false);
         fr.setLocationRelativeTo(null);//ทำให้ตอนรันโค้ดแล้วทำให้windowมาอยู่ตรงกลางจอ
+         int n = 8; // Number of threads 
+        for (int i=0; i<8; i++) 
+        { 
+            Thread object = new Thread(new MultithreadingDemo());
+            
+            object.start(); 
+        } 
+
     }
 
     private static int getRandomNumberInRange(int min, int max) {//เอาไว้สุ่มเลข
@@ -58,6 +70,7 @@ public class MyMap extends JPanel implements KeyListener, Commons {
         return r.nextInt((max - min) + 1) + min;
     }
 
+
     public void keyTyped(KeyEvent ke) {
     }
 
@@ -68,4 +81,34 @@ public class MyMap extends JPanel implements KeyListener, Commons {
     public void keyReleased(KeyEvent ke) {
     }
 
+//    @Override
+//    public void run() {
+//        while (true) {
+//            try {
+//                Thread.sleep(50);
+//                if (count == 1) {
+//                    test.setLocation(potX + 5, potY);
+//                }
+//                if (count == 2) {
+//                    test.setLocation(potX, potY + 5);
+//                }
+//                if (count == 3) {
+//                    test.setLocation(potX - 5, potY);
+//                }
+//                if (count == 4) {
+//                    test.setLocation(potX, potY - 5);
+//                }
+//                count++;
+//                if (count == 5) {
+//                    count = 1;
+//                }
+//
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(MyMap.class
+//                        .getName()).log(Level.SEVERE, null, ex);
+//            }
+//        System.out.println(count);
+//    }
+//
+//}
 }
