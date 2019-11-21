@@ -48,22 +48,27 @@ public class Menu extends JPanel {
         fr.add(lb_bg);
 
 //        fr.add(p1);
-        lb_bg.setBounds(0, 0, 500, 630);
-        logo.setBounds(70, 70, 347, 159);
-//        p1.setBounds(630, 100, 500, 500);
-        btn1.setBounds(100, 250, 251, 103);
-        btn2.setBounds(130, 375, 249, 97);
-//        fr.setLayout(new FlowLayout());
-        btn1.setBorder(BorderFactory.createEmptyBorder());
-        btn1.setContentAreaFilled(false);
+
+        lb_bg.setBounds(0, 0, 500, 630);    //กำหนดตำแน่งและขนาด 
+        logo.setBounds(70, 70, 347, 159);   //กำหนดตำแน่งและขนาด
         
-        btn2.setBorder(BorderFactory.createEmptyBorder());
-        btn2.setContentAreaFilled(false);
+//        p1.setBounds(630, 100, 500, 500);
+
+        btn1.setBounds(100, 250, 251, 103); //กำหนดตำแน่งและขนาด
+        btn2.setBounds(130, 375, 249, 97);  //กำหนดตำแน่งและขนาด
+        
+//        fr.setLayout(new FlowLayout());
+
+        btn1.setBorder(BorderFactory.createEmptyBorder()); //ทำให้ปุ่มไม่มีขอบ
+        btn1.setContentAreaFilled(false);                  // ไม่มีพื้นหลังปุ่ม
+        
+        btn2.setBorder(BorderFactory.createEmptyBorder());//ทำให้ปุ่มไม่มีขอบ
+        btn2.setContentAreaFilled(false);                  // ไม่มีพื้นหลังปุ่ม
 
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fr.setLocationRelativeTo(null);
+        fr.setLocationRelativeTo(null); //ให้JFrame ขึ้นตรงกลางหน้าจอ
         fr.setVisible(true);
-        fr.setResizable(false);
+        fr.setResizable(false);         //ปรับขนาดไม่ได้
     }
 
     public void paintComponent(Graphics g) {
