@@ -11,15 +11,14 @@ import javax.swing.*;
 public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
 
     static String[] backG = {"bg", "bg_1", "bg_2"}; //เอาไว้ random พื้นหลังตอนเปิดเกม
-    static String[] oong = {"sprite_oong-1", "sprite_oong-2"};
     static int i = getRandomNumberInRange(0, 2); //เลขที่ได้จาการ Random
-    static JTextField txt1 = new JTextField(10);
-    static int hp = 10;
-    static JLabel text1 = new JLabel(words[getRandomNumberInRange(0, 700)]);
-    static JLabel text2 = new JLabel(words[getRandomNumberInRange(0, 700)]);
-    static JLabel text3 = new JLabel(words[getRandomNumberInRange(0, 700)]);
-    static JLabel text4 = new JLabel(Integer.toString(hp));
-    static int potX[] = {getRandomNumberInRange(100, 1000), getRandomNumberInRange(100, 1000), getRandomNumberInRange(100, 1000)};
+    static JTextField answer = new JTextField(10);
+    static int hp = 5;
+    static JLabel text1 = new JLabel(words[getRandomNumberInRange(0, 900)]);
+    static JLabel text2 = new JLabel(words[getRandomNumberInRange(0, 900)]);
+    static JLabel text3 = new JLabel(words[getRandomNumberInRange(0, 900)]);
+    static JLabel HP_bar = new JLabel(Integer.toString(hp));
+    static int potX[] = {getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700)};
     static int potY[] = {-100, -300, -500};
 
     public static void main(String[] args) {
@@ -35,17 +34,14 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
         fr.setSize(1100, 650);//จัดขนาดของwindow
 
         JPanel p1 = new JPanel();
-        JPanel p2 = new JPanel();
-        JPanel p3 = new JPanel();
-        JPanel p4 = new JPanel();
 
         //set layout
         p1.setLayout(new FlowLayout());
-        p1.add(txt1);
+        p1.add(answer);
         fr.add(text1);
         fr.add(text2);
         fr.add(text3);
-        fr.add(text4);
+        fr.add(HP_bar);
         fr.add(img_oong_b);
         fr.add(img_oong_w);
         fr.add(bg_lb);
@@ -56,10 +52,11 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
         text2.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
         text3.setForeground(Color.white);
         text3.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
-        text4.setForeground(Color.white);
-        text4.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
-        
-        text4.setBounds(1000, -80, 1000, 250);
+        HP_bar.setForeground(Color.white);
+        HP_bar.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+        p1.setBackground(Color.black);
+
+        HP_bar.setBounds(1000, -80, 1000, 250);
         img_oong_b.setBounds(900, 350, 150, 250);//จัดตำแหน่งรูปกับขนาด (x,y,w,h)
         img_oong_w.setBounds(50, 350, 150, 250);//จัดตำแหน่งรูปกับขนาด (x,y,w,h)
         fr.add(p1, BorderLayout.SOUTH);
@@ -76,59 +73,65 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
     }
 
     public void run() {
-
+        int speed = 100;
         try {
             while (hp != 0) {
-                Thread.sleep(100);
+                Thread.sleep(speed);
                 text1.setBounds(potX[0], potY[0], 1000, 250);
                 text2.setBounds(potX[1], potY[1], 1000, 250);
                 text3.setBounds(potX[2], potY[2], 1000, 250);
-                
-                if(txt1.getText().equals(text1.getText())){
+
+                //check text
+                if (answer.getText().equals(text1.getText())) {
                     potY[0] = -300;
-                    txt1.setText("");
+                    if(speed > 40){speed--;}
+                    answer.setText("");
                 }
-                if(txt1.getText().equals(text2.getText())){
+                if (answer.getText().equals(text2.getText())) {
                     potY[1] = -300;
-                    txt1.setText("");
+                    if(speed > 40){speed--;}
+                    answer.setText("");
                 }
-                if(txt1.getText().equals(text3.getText()) ){
+                if (answer.getText().equals(text3.getText())) {
                     potY[2] = -300;
-                    txt1.setText("");
+                    if(speed > 40){speed--;}
+                    answer.setText("");
                 }
+                //text down floor to HP decrease
                 if (potY[0] > 425) {
                     hp -= 1;
                     potY[0] = -135;
                     potX[0] = getRandomNumberInRange(100, 700);
-                    
                 }
+                //change text
                 if (potY[0] == -130) {
                     text1.setText(words[getRandomNumberInRange(0, 900)]);
                 }
-                
+                //text down floor to HP decrease
                 if (potY[1] > 425) {
                     potY[1] = -130;
                     potX[1] = getRandomNumberInRange(100, 700);
                     hp -= 1;
                 }
+                //change text
                 if (potY[1] == -135) {
                     text2.setText(words[getRandomNumberInRange(0, 900)]);
                 }
-                
+                //text down floor to HP decrease
                 if (potY[2] > 425) {
                     potY[2] = -135;
                     potX[2] = getRandomNumberInRange(100, 700);
                     hp -= 1;
                 }
+                //change text
                 if (potY[2] == -130) {
                     text3.setText(words[getRandomNumberInRange(0, 900)]);
                 }
-                System.out.println(hp);
-                text4.setText(Integer.toString(hp));
+                HP_bar.setText(Integer.toString(hp));
                 potY[0] += 5;
                 potY[1] += 5;
                 potY[2] += 5;
-
+                System.out.println(speed);
             }
         } catch (Exception e) {
         }
@@ -157,33 +160,3 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
 
     }
 }
-//    @Override
-//    public void run() {
-//        while (true) {
-//            try {
-//                Thread.sleep(50);
-//                if (count == 1) {
-//                    test.setLocation(potX + 5, potY);
-//                }
-//                if (count == 2) {
-//                    test.setLocation(potX, potY + 5);
-//                }
-//                if (count == 3) {
-//                    test.setLocation(potX - 5, potY);
-//                }
-//                if (count == 4) {
-//                    test.setLocation(potX, potY - 5);
-//                }
-//                count++;
-//                if (count == 5) {
-//                    count = 1;
-//                }
-//
-//            } catch (InterruptedException ex) {
-//                Logger.getLogger(MyMap.class
-//                        .getName()).log(Level.SEVERE, null, ex);
-//            }
-//        System.out.println(count);
-//    }
-//
-//}
