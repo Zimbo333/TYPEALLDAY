@@ -11,16 +11,14 @@ import javax.swing.*;
  *
  * @author Acer
  */
-public class Menu extends JPanel {
+public class Menu extends JPanel implements Runnable {
 
-    static Toolkit tk = Toolkit.getDefaultToolkit();
-    static int xSize = ((int) tk.getScreenSize().getWidth());
-    static int ySize = ((int) tk.getScreenSize().getHeight());
     private JFrame fr;
     private JPanel p1, p2, p3;
     private ImageIcon i1, i2, i3, bg;
     private JLabel lb1, logo, lb_bg;
     private JButton btn1, btn2, btn3, btn4;
+    private int x = -168;
 
     public Menu() {
         fr = new JFrame("TypeAllDay");
@@ -48,20 +46,17 @@ public class Menu extends JPanel {
         fr.add(lb_bg);
 
 //        fr.add(p1);
-
-        lb_bg.setBounds(0, 0, 500, 630);    //กำหนดตำแหน่งและขนาด 
+        lb_bg.setBounds(x, 0, 1000, 630);    //กำหนดตำแหน่งและขนาด 
         logo.setBounds(70, 70, 347, 159);   //กำหนดตำแหน่งและขนาด
-        
-//        p1.setBounds(630, 100, 500, 500);
 
+//        p1.setBounds(630, 100, 500, 500);
         btn1.setBounds(100, 250, 251, 103); //กำหนดตำแน่งและขนาด
         btn2.setBounds(130, 375, 249, 97);  //กำหนดตำแน่งและขนาด
-        
-//        fr.setLayout(new FlowLayout());
 
+//        fr.setLayout(new FlowLayout());
         btn1.setBorder(BorderFactory.createEmptyBorder()); //ทำให้ปุ่มไม่มีขอบ
         btn1.setContentAreaFilled(false);                  // ไม่มีพื้นหลังปุ่ม
-        
+
         btn2.setBorder(BorderFactory.createEmptyBorder());//ทำให้ปุ่มไม่มีขอบ
         btn2.setContentAreaFilled(false);                  // ไม่มีพื้นหลังปุ่ม
 
@@ -69,6 +64,7 @@ public class Menu extends JPanel {
         fr.setLocationRelativeTo(null); //ให้JFrame ขึ้นตรงกลางหน้าจอ
         fr.setVisible(true);
         fr.setResizable(false);         //ปรับขนาดไม่ได้
+
     }
 
     public void paintComponent(Graphics g) {
@@ -76,6 +72,25 @@ public class Menu extends JPanel {
     }
 
     public static void main(String[] args) {
-        new Menu();
+        Menu menu = new Menu();
+        Thread t = new Thread(menu);
+        t.start();
+    }
+
+    public void run() {
+
+        try {
+            while (true) {
+                Thread.sleep(10);
+                lb_bg.setBounds(x, 0, 1000, 630);
+                x -= 5;
+                System.out.println(x);
+                if (x <= -506) {
+                    x = -168;
+                }
+            }
+        } catch (Exception e) {
+        }
+        repaint();
     }
 }
