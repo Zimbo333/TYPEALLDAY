@@ -8,18 +8,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 
-public class MyMap extends JPanel implements KeyListener, Commons{
+public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
 
-    static Toolkit tk = Toolkit.getDefaultToolkit();
-    static int xSize = ((int) tk.getScreenSize().getWidth()); //ขนาดความกว้างตามขนาดจอของเราแนวนอน
-    static int ySize = ((int) tk.getScreenSize().getHeight());//ขนาดความสูงตามขนาดจอของเราแนวตั้ง
     static String[] backG = {"bg", "bg_1", "bg_2"}; //เอาไว้ random พื้นหลังตอนเปิดเกม
     static String[] oong = {"sprite_oong-1", "sprite_oong-2"};
     static int i = getRandomNumberInRange(0, 2); //เลขที่ได้จาการ Random
-    static int count, potX, potY;
-    static JLabel test = new JLabel("Hello");
+    static int count;
+    static JLabel text1 = new JLabel(words[getRandomNumberInRange(0, 900)]);
+    static JLabel text2 = new JLabel(words[getRandomNumberInRange(0, 900)]);
+    static JLabel text3 = new JLabel(words[getRandomNumberInRange(0, 900)]);
+    static int potX[] = {getRandomNumberInRange(100, 1000), getRandomNumberInRange(100, 1000), getRandomNumberInRange(100, 1000)};
+    static int potY[] = {-100, -300, -500};
 
     public static void main(String[] args) {
+        MyMap Map = new MyMap();
         JFrame fr = new JFrame();
         ImageIcon bg = new ImageIcon("src/images/" + backG[i] + ".jpg"); //รูปพื้นหลังที่สุ่มเสร็จแล้วเอามาเก็บในตัวแปร
         ImageIcon oong_b = new ImageIcon("src/images/sprite_oong.gif");//รูปอ๋องดำ
@@ -39,25 +41,75 @@ public class MyMap extends JPanel implements KeyListener, Commons{
         //set layout
         p1.setLayout(new FlowLayout());
         p1.add(txt1);
+        fr.add(text1);
+        fr.add(text2);
+        fr.add(text3);
         fr.add(img_oong_b);
         fr.add(img_oong_w);
         fr.add(bg_lb);
+
+        text1.setForeground(Color.white);
+        text1.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+        text2.setForeground(Color.white);
+        text2.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+        text3.setForeground(Color.white);
+        text3.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
         img_oong_b.setBounds(900, 350, 150, 250);//จัดตำแหน่งรูปกับขนาด (x,y,w,h)
         img_oong_w.setBounds(50, 350, 150, 250);//จัดตำแหน่งรูปกับขนาด (x,y,w,h)
         fr.add(p1, BorderLayout.SOUTH);
 
+        Thread t1 = new Thread(Map);
+        t1.start();
+
+//        fr.add(meteor.paint());
         fr.setVisible(true);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fr.setResizable(false);
         fr.setLocationRelativeTo(null);//ทำให้ตอนรันโค้ดแล้วทำให้windowมาอยู่ตรงกลางจอ
-         int n = 8; // Number of threads 
-        for (int i=0; i<8; i++) 
-        { 
-            Thread object = new Thread(new MultithreadingDemo());
-            
-            object.start(); 
-        } 
 
+    }
+
+    public void run() {
+
+        try {
+            while (true) {
+                Thread.sleep(100);
+                text1.setBounds(potX[0], potY[0], 1000, 250);
+                text2.setBounds(potX[1], potY[1], 1000, 250);
+                text3.setBounds(potX[2], potY[2], 1000, 250);
+                
+                
+                if (potY[0] > 425) {
+                    potY[0] = -135;
+                    potX[0] = getRandomNumberInRange(100, 900);
+                }
+                if (potY[0] == -130) {
+                    text1.setText(words[getRandomNumberInRange(0, 900)]);
+                }
+                
+                if (potY[1] > 425) {
+                    potY[1] = -130;
+                    potX[1] = getRandomNumberInRange(100, 900);
+                }
+                if (potY[1] == -135) {
+                    text2.setText(words[getRandomNumberInRange(0, 900)]);
+                }
+                
+                if (potY[2] > 425) {
+                    potY[2] = -135;
+                    potX[2] = getRandomNumberInRange(100, 900);
+                }
+                if (potY[2] == -130) {
+                    text3.setText(words[getRandomNumberInRange(0, 900)]);
+                }
+                potY[0] += 5;
+                potY[1] += 5;
+                potY[2] += 5;
+
+            }
+        } catch (Exception e) {
+        }
+        repaint();
     }
 
     private static int getRandomNumberInRange(int min, int max) {//เอาไว้สุ่มเลข
@@ -70,7 +122,6 @@ public class MyMap extends JPanel implements KeyListener, Commons{
         return r.nextInt((max - min) + 1) + min;
     }
 
-
     public void keyTyped(KeyEvent ke) {
     }
 
@@ -78,9 +129,11 @@ public class MyMap extends JPanel implements KeyListener, Commons{
 
     }
 
+    @Override
     public void keyReleased(KeyEvent ke) {
-    }
 
+    }
+}
 //    @Override
 //    public void run() {
 //        while (true) {
@@ -111,4 +164,3 @@ public class MyMap extends JPanel implements KeyListener, Commons{
 //    }
 //
 //}
-}

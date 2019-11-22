@@ -1,19 +1,40 @@
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import javax.swing.ImageIcon;
-public class Meteor extends Sprite{
-    public Meteor(int x, int y) {
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-        initMeteor(x, y);
+public class Meteor extends MyMap {
+
+    int x = 180;
+    int y = 100;
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        Graphics2D gd = (Graphics2D) g;
+        gd.setColor(Color.red);
+        gd.setFont(new Font("Bold",Font.BOLD,22));
+        gd.drawString("FUCK YOU", x, y);
+        try {
+            Thread.sleep(1000);
+            y += 50;
+        } catch (Exception e) {
+        }
+        if (y > getHeight()) {
+            y = 0;
+        }
+        repaint();
     }
-     private void initMeteor(int x, int y) {
 
-        this.x = x;
-        this.y = y;
-
-//        bomb = new Bomb(x, y);
-
-        String alienImg = "src/images/meteor.jpg";
-        ImageIcon ii = new ImageIcon(alienImg);
-
-        setImage(ii.getImage());
+    public static void main(String[] args) {
+        JFrame f = new JFrame();
+        f.setSize(500,500);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.add(new Meteor());
+        f.setLocationRelativeTo(null);
+        f.setVisible(true);
     }
 }
