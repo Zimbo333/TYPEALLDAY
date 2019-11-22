@@ -21,7 +21,7 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
     static int potX[] = {getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700)};
     static int potY[] = {-100, -300, -500};
 
-    public static void main(String[] args) {
+    public static void main() {
         MyMap Map = new MyMap();
         JFrame fr = new JFrame();
         ImageIcon bg = new ImageIcon("src/images/" + backG[i] + ".jpg"); //รูปพื้นหลังที่สุ่มเสร็จแล้วเอามาเก็บในตัวแปร
@@ -158,5 +158,9 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
     @Override
     public void keyReleased(KeyEvent ke) {
 
+    }
+
+    void main(char c) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
