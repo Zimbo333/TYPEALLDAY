@@ -28,7 +28,7 @@ public class MyMap extends JPanel implements KeyListener, Commons{
         JLabel img_oong_w = new JLabel(oong_w);//เอารูปใส่JLabel
         JLabel bg_lb = new JLabel(bg);//เอารูปใส่JLabel
 
-        fr.setSize((xSize / 2) + 300, (ySize / 2) + 200);//จัดขนาดของwindow
+        fr.setSize(1100, 650);//จัดขนาดของwindow
 
         JTextField txt1 = new JTextField(10);
         JPanel p1 = new JPanel();
