@@ -16,6 +16,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
     static int potX[] = {getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700)};
     static int potY[] = {-200, -400, -600};
     static int speed = 100;
+    private boolean check = true;
     private JFrame fr;
     private JTextField answer;
     private ImageIcon game_over, img_hp, img_menu, img_retry, oong_b, oong_w, oong_b_dm, oong_w_dm, bg;
@@ -110,7 +111,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
 
     public void run() {
         try {
-            while (hp != 0) {
+            while (check) {
                 Thread.sleep(speed);
                 text1.setBounds(potX[0], potY[0], 1000, 250);
                 text2.setBounds(potX[1], potY[1], 1000, 250);
@@ -188,6 +189,15 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                 if (hp == 1) {
                     img_HP2.setBounds(2000, 0, 64, 64);
                 }
+                if (hp == 0) {
+                    endSCENE.setBounds(50, 150, 1000, 250);
+                    btn_1.setBounds(355, 320, 215, 73);
+                    btn_2.setBounds(525, 320, 215, 73);
+                    img_HP3.setBounds(2000, 0, 64, 64);
+                    check = false;
+                    System.out.println(check);
+                }
+
                 potY[0] += 5;
                 potY[1] += 5;
                 potY[2] += 5;
@@ -195,16 +205,22 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
 
         } catch (Exception e) {
         }
-        if (hp == 0) {
-            endSCENE.setBounds(50, 150, 1000, 250);
-            btn_1.setBounds(355, 320, 215, 73);
-            btn_2.setBounds(525, 320, 215, 73);
-            img_HP3.setBounds(2000, 0, 64, 64);
 
-        }
         repaint();
     }
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == btn_1) {
+            check = true;
+            System.out.println(check);
 
+        }
+        if (ae.getSource() == btn_2) {
+            Menu menu = new Menu();
+            Thread t = new Thread(menu);
+            t.start();
+            fr.dispose();
+        }
+    }
     private static int getRandomNumberInRange(int min, int max) {//เอาไว้สุ่มเลข
         if (min >= max) {
             throw new IllegalArgumentException("max must be greater than min");
@@ -215,16 +231,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
         return r.nextInt((max - min) + 1) + min;
     }
 
-    public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == btn_1) {
-            fr.dispose();
-            MyMap.main();
-            
-        }
-        if (ae.getSource() == btn_2) {      
-            fr.dispose();
-        }
-    }
+
 
     public static void setSpeed(int speed) {
         MyMap.speed = speed;
