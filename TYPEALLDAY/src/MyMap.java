@@ -100,20 +100,20 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
                 if (answer.getText().equals(text1.getText())) {
                     img_oong_w.setIcon(oong_w_dm);
                     potY[0] = -300;
-                    if(speed > 40){speed--;}
+                    if(speed > 40){speed-=2;}
                     answer.setText("");
                 }
                 
                 if (answer.getText().equals(text2.getText())) {
                     img_oong_w.setIcon(oong_w_dm);
                     potY[1] = -300;
-                    if(speed > 40){speed--;}
+                    if(speed > 40){speed-=2;}
                     answer.setText("");
                 }
                 if (answer.getText().equals(text3.getText())) {
                     img_oong_w.setIcon(oong_w_dm);
                     potY[2] = -300;
-                    if(speed > 40){speed--;}
+                    if(speed > 40){speed-=2;}
                     answer.setText("");
                 }
                 //change รูปอ๋องขาวที่โดนตีให้กับมาเป็นตัวเดิม
