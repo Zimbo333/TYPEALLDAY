@@ -118,7 +118,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
 
                 //check text
                 if (answer.getText().equals(text1.getText())) {
-                    img_oong_w.setIcon(oong_w_dm);
+                    img_oong_b.setIcon(oong_b_dm);
                     potY[0] = -300;
                     if (speed > 40) {
                         speed--;
@@ -127,7 +127,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                 }
 
                 if (answer.getText().equals(text2.getText())) {
-                    img_oong_w.setIcon(oong_w_dm);
+                    img_oong_b.setIcon(oong_b_dm);
                     potY[1] = -300;
                     if (speed > 40) {
                         speed--;
@@ -135,7 +135,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                     answer.setText("");
                 }
                 if (answer.getText().equals(text3.getText())) {
-                    img_oong_w.setIcon(oong_w_dm);
+                    img_oong_b.setIcon(oong_b_dm);
                     potY[2] = -300;
                     if (speed > 40) {
                         speed--;
@@ -144,11 +144,11 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                 }
                 //change รูปอ๋องขาวที่โดนตีให้กับมาเป็นตัวเดิม
                 if (potY[0] == -290 || potY[1] == -290 || potY[2] == -290) {
-                    img_oong_w.setIcon(oong_w);
+                    img_oong_b.setIcon(oong_b);
                 }
                 //text down floor to HP decrease
                 if (potY[0] > 425) {
-                    img_oong_b.setIcon(oong_b_dm);
+                    img_oong_w.setIcon(oong_w_dm);
                     potY[0] = -145;
                     potX[0] = getRandomNumberInRange(100, 700);
                     hp -= 1;
@@ -156,11 +156,11 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                 //change text
                 if (potY[0] == -135) {
                     text1.setText(words[getRandomNumberInRange(0, 900)]);
-                    img_oong_b.setIcon(oong_b);
+                    img_oong_w.setIcon(oong_w);
                 }
                 //text down floor to HP decrease
                 if (potY[1] > 425) {
-                    img_oong_b.setIcon(oong_b_dm);
+                    img_oong_w.setIcon(oong_w_dm);
                     potY[1] = -145;
                     potX[1] = getRandomNumberInRange(100, 700);
                     hp -= 1;
@@ -168,11 +168,11 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                 //change text
                 if (potY[1] == -135) {
                     text2.setText(words[getRandomNumberInRange(0, 900)]);
-                    img_oong_b.setIcon(oong_b);
+                    img_oong_w.setIcon(oong_w);
                 }
                 //text down floor to HP decrease
                 if (potY[2] > 425) {
-                    img_oong_b.setIcon(oong_b_dm);
+                    img_oong_w.setIcon(oong_w_dm);
                     potY[2] = -145;
                     potX[2] = getRandomNumberInRange(100, 700);
                     hp -= 1;
@@ -180,7 +180,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                 //change text
                 if (potY[2] == -135) {
                     text3.setText(words[getRandomNumberInRange(0, 900)]);
-                    img_oong_b.setIcon(oong_b);
+                    img_oong_w.setIcon(oong_w);
                 }
                 if (hp == 2) {
                     img_HP1.setBounds(2000, 0, 64, 64);
@@ -221,8 +221,8 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
             MyMap.main();
             
         }
-        if (ae.getSource() == btn_2) {
-            System.out.println("M");
+        if (ae.getSource() == btn_2) {      
+            fr.dispose();
         }
     }
 
