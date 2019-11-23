@@ -90,7 +90,6 @@ public class Menu extends JPanel implements Runnable, ActionListener {
                 Thread.sleep(10);
                 lb_bg.setBounds(x, 0, 1000, 630);
                 x -= 5;
-                System.out.println(x);
                 if (x <= -506) {
                     x = -168;
                 }

@@ -13,13 +13,16 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
     static String[] backG = {"bg", "bg_1", "bg_2"}; //เอาไว้ random พื้นหลังตอนเปิดเกม
     static int i = getRandomNumberInRange(0, 2); //เลขที่ได้จาการ Random
     static JTextField answer = new JTextField(10);
-    static int hp = 1;
+    static int hp = 3;
     static ImageIcon game_over = new ImageIcon("src/images/game_over.png");
+    static ImageIcon img_hp = new ImageIcon("src/images/hp.gif");
     static JLabel text1 = new JLabel(words[getRandomNumberInRange(0, 900)]);
     static JLabel text2 = new JLabel(words[getRandomNumberInRange(0, 900)]);
     static JLabel text3 = new JLabel(words[getRandomNumberInRange(0, 900)]);
-    static JLabel HP_bar = new JLabel(Integer.toString(hp));
     static JLabel endSCENE = new JLabel(game_over);
+    static JLabel img_HP1 = new JLabel(img_hp);
+    static JLabel img_HP2 = new JLabel(img_hp);
+    static JLabel img_HP3 = new JLabel(img_hp);
     static int potX[] = {getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700)};
     static int potY[] = {-200, -400, -600};
     static int speed = 100;
@@ -48,7 +51,9 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
         fr.add(text1);
         fr.add(text2);
         fr.add(text3);
-        fr.add(HP_bar);
+        fr.add(img_HP1);
+        fr.add(img_HP2);
+        fr.add(img_HP3);
         
         
         fr.add(img_oong_b);
@@ -61,12 +66,12 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
         text2.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
         text3.setForeground(Color.white);
         text3.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
-        HP_bar.setForeground(Color.white);
-        HP_bar.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
         p1.setBackground(Color.black);
-
+        
+        img_HP1.setBounds(900, 0, 64, 64);
+        img_HP2.setBounds(950, 0, 64, 64);
+        img_HP3.setBounds(1000, 0, 64, 64);
         endSCENE.setBounds(1000, 1000, 1000, 250);
-        HP_bar.setBounds(1000, -80, 1000, 250);
         img_oong_b.setBounds(900, 350, 150, 250);//จัดตำแหน่งรูปกับขนาด (x,y,w,h)
         img_oong_w.setBounds(50, 350, 150, 250);//จัดตำแหน่งรูปกับขนาด (x,y,w,h)
         fr.add(p1, BorderLayout.SOUTH);
@@ -135,8 +140,8 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
                 if (potY[2] == -130) {
                     text3.setText(words[getRandomNumberInRange(0, 900)]);
                 }
-               
-                HP_bar.setText(Integer.toString(hp));
+               if(hp == 2){img_HP1.setBounds(2000, 0, 64, 64);}
+               if(hp == 1){img_HP2.setBounds(2000, 0, 64, 64);}
                 potY[0] += 5;
                 potY[1] += 5;
                 potY[2] += 5;
@@ -145,8 +150,8 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
         } catch (Exception e) {
         }
         if(hp == 0){
-                System.out.println("BOOM");
                     endSCENE.setBounds(50, 200, 1000, 250);
+                    img_HP3.setBounds(2000, 0, 64, 64);
                     
                 }
         repaint();
