@@ -8,39 +8,44 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 
-public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
+public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
 
     static String[] backG = {"bg", "bg_1", "bg_2"}; //เอาไว้ random พื้นหลังตอนเปิดเกม
     static int i = getRandomNumberInRange(0, 2); //เลขที่ได้จาการ Random
-    static JTextField answer = new JTextField(10);
     static int hp = 3;
-    static ImageIcon game_over = new ImageIcon("src/images/game_over.png");
-    static ImageIcon img_hp = new ImageIcon("src/images/hp.gif");
-    static ImageIcon oong_b = new ImageIcon("src/images/sprite_oong.gif");//รูปอ๋องดำ
-    static ImageIcon oong_w = new ImageIcon("src/images/sprite_white_oong.gif");//รูปอ๋องขาว
-    static ImageIcon oong_b_dm = new ImageIcon("src/images/sprite_oong_dmg.png");//รูปอ๋องดำโดนตี
-    static ImageIcon oong_w_dm = new ImageIcon("src/images/sprite_white_oong_dmg.png");//รูปอ๋องขาวโดนตี
-    static JLabel text1 = new JLabel(words[getRandomNumberInRange(0, 900)]);
-    static JLabel text2 = new JLabel(words[getRandomNumberInRange(0, 900)]);
-    static JLabel text3 = new JLabel(words[getRandomNumberInRange(0, 900)]);
-    static JLabel endSCENE = new JLabel(game_over);
-    static JLabel img_HP1 = new JLabel(img_hp);
-    static JLabel img_HP2 = new JLabel(img_hp);
-    static JLabel img_HP3 = new JLabel(img_hp);
-    static JLabel img_oong_b = new JLabel(oong_b);//เอารูปใส่JLabel
-    static JLabel img_oong_w = new JLabel(oong_w);//เอารูปใส่JLabel
     static int potX[] = {getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700)};
     static int potY[] = {-200, -400, -600};
     static int speed = 100;
-    static int status = 0;
-    static JFrame fr = new JFrame();
+    private JFrame fr;
+    private JTextField answer;
+    private ImageIcon game_over, img_hp, img_menu, img_retry, oong_b, oong_w, oong_b_dm, oong_w_dm, bg;
+    private JLabel text1, text2, text3, endSCENE, img_HP1, img_HP2, img_HP3, img_oong_b, img_oong_w, bg_lb;
+    private JButton btn_1, btn_2;
 
-    public static void main() {
-        MyMap Map = new MyMap();
-        
-        ImageIcon bg = new ImageIcon("src/images/" + backG[i] + ".jpg"); //รูปพื้นหลังที่สุ่มเสร็จแล้วเอามาเก็บในตัวแปร
-        JLabel bg_lb = new JLabel(bg);//เอารูปใส่JLabel game_over
-        
+    public MyMap() {
+        fr = new JFrame();
+        answer = new JTextField(10);
+        bg = new ImageIcon("src/images/" + backG[i] + ".jpg"); //รูปพื้นหลังที่สุ่มเสร็จแล้วเอามาเก็บในตัวแปร
+        game_over = new ImageIcon("src/images/game_over.png");
+        img_hp = new ImageIcon("src/images/hp.gif");
+        img_menu = new ImageIcon("src/images/menu.png");
+        img_retry = new ImageIcon("src/images/retry.png");
+        oong_b = new ImageIcon("src/images/sprite_oong.gif");//รูปอ๋องดำ
+        oong_w = new ImageIcon("src/images/sprite_white_oong.gif");//รูปอ๋องขาว
+        oong_b_dm = new ImageIcon("src/images/sprite_oong_dmg.png");//รูปอ๋องดำโดนตี
+        oong_w_dm = new ImageIcon("src/images/sprite_white_oong_dmg.png");//รูปอ๋องขาวโดนตี
+        text1 = new JLabel(words[getRandomNumberInRange(0, 900)]);
+        text2 = new JLabel(words[getRandomNumberInRange(0, 900)]);
+        text3 = new JLabel(words[getRandomNumberInRange(0, 900)]);
+        bg_lb = new JLabel(bg);//เอารูปใส่JLabel game_over
+        endSCENE = new JLabel(game_over);
+        img_HP1 = new JLabel(img_hp);
+        img_HP2 = new JLabel(img_hp);
+        img_HP3 = new JLabel(img_hp);
+        img_oong_b = new JLabel(oong_b);//เอารูปใส่JLabel
+        img_oong_w = new JLabel(oong_w);//เอารูปใส่JLabel
+        btn_1 = new JButton(img_retry);
+        btn_2 = new JButton(img_menu);
 
         fr.setSize(1100, 650);//จัดขนาดของwindow
 
@@ -50,14 +55,16 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
         p1.setLayout(new FlowLayout());
         p1.add(answer);
         fr.add(endSCENE);
+        fr.add(btn_1);
+        fr.add(btn_2);
         fr.add(text1);
         fr.add(text2);
         fr.add(text3);
         fr.add(img_HP1);
         fr.add(img_HP2);
         fr.add(img_HP3);
-        
-        
+        fr.add(p1, BorderLayout.SOUTH);
+
         fr.add(img_oong_b);
         fr.add(img_oong_w);
         fr.add(bg_lb);
@@ -69,17 +76,24 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
         text3.setForeground(Color.white);
         text3.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
         p1.setBackground(Color.black);
-        
+
         img_HP1.setBounds(900, 0, 64, 64);
         img_HP2.setBounds(950, 0, 64, 64);
         img_HP3.setBounds(1000, 0, 64, 64);
+        btn_1.setBounds(1000, 1000, 215, 73);
+        btn_2.setBounds(1000, 1000, 215, 73);
         endSCENE.setBounds(1000, 1000, 1000, 250);
         img_oong_b.setBounds(900, 350, 150, 250);//จัดตำแหน่งรูปกับขนาด (x,y,w,h)
         img_oong_w.setBounds(50, 350, 150, 250);//จัดตำแหน่งรูปกับขนาด (x,y,w,h)
-        fr.add(p1, BorderLayout.SOUTH);
 
-        Thread t1 = new Thread(Map);
-        t1.start();
+        btn_1.setBorder(BorderFactory.createEmptyBorder()); //ทำให้ปุ่มไม่มีขอบ
+        btn_1.setContentAreaFilled(false);                  // ไม่มีพื้นหลังปุ่ม
+
+        btn_2.setBorder(BorderFactory.createEmptyBorder());//ทำให้ปุ่มไม่มีขอบ
+        btn_2.setContentAreaFilled(false);
+
+        btn_1.addActionListener(this);
+        btn_2.addActionListener(this);
 
 //        fr.add(meteor.paint());
         fr.setVisible(true);
@@ -88,7 +102,13 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
         fr.setLocationRelativeTo(null);//ทำให้ตอนรันโค้ดแล้วทำให้windowมาอยู่ตรงกลางจอ
     }
 
-    public void run() {       
+    public static void main() {
+        MyMap Map = new MyMap();
+        Thread t1 = new Thread(Map);
+        t1.start();
+    }
+
+    public void run() {
         try {
             while (hp != 0) {
                 Thread.sleep(speed);
@@ -100,28 +120,36 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
                 if (answer.getText().equals(text1.getText())) {
                     img_oong_w.setIcon(oong_w_dm);
                     potY[0] = -300;
-                    if(speed > 40){speed-=2;}
+                    if (speed > 40) {
+                        speed--;
+                    }
                     answer.setText("");
                 }
-                
+
                 if (answer.getText().equals(text2.getText())) {
                     img_oong_w.setIcon(oong_w_dm);
                     potY[1] = -300;
-                    if(speed > 40){speed-=2;}
+                    if (speed > 40) {
+                        speed--;
+                    }
                     answer.setText("");
                 }
                 if (answer.getText().equals(text3.getText())) {
                     img_oong_w.setIcon(oong_w_dm);
                     potY[2] = -300;
-                    if(speed > 40){speed-=2;}
+                    if (speed > 40) {
+                        speed--;
+                    }
                     answer.setText("");
                 }
                 //change รูปอ๋องขาวที่โดนตีให้กับมาเป็นตัวเดิม
-                if(potY[0] == -295|| potY[1] == -295|| potY[2] == -295){img_oong_w.setIcon(oong_w);}
+                if (potY[0] == -290 || potY[1] == -290 || potY[2] == -290) {
+                    img_oong_w.setIcon(oong_w);
+                }
                 //text down floor to HP decrease
-                if (potY[0] > 425) {                  
+                if (potY[0] > 425) {
                     img_oong_b.setIcon(oong_b_dm);
-                    potY[0] = -140;
+                    potY[0] = -145;
                     potX[0] = getRandomNumberInRange(100, 700);
                     hp -= 1;
                 }
@@ -133,7 +161,7 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
                 //text down floor to HP decrease
                 if (potY[1] > 425) {
                     img_oong_b.setIcon(oong_b_dm);
-                    potY[1] = -140;
+                    potY[1] = -145;
                     potX[1] = getRandomNumberInRange(100, 700);
                     hp -= 1;
                 }
@@ -145,7 +173,7 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
                 //text down floor to HP decrease
                 if (potY[2] > 425) {
                     img_oong_b.setIcon(oong_b_dm);
-                    potY[2] = -140;
+                    potY[2] = -145;
                     potX[2] = getRandomNumberInRange(100, 700);
                     hp -= 1;
                 }
@@ -154,20 +182,26 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
                     text3.setText(words[getRandomNumberInRange(0, 900)]);
                     img_oong_b.setIcon(oong_b);
                 }
-               if(hp == 2){img_HP1.setBounds(2000, 0, 64, 64);}
-               if(hp == 1){img_HP2.setBounds(2000, 0, 64, 64);}
+                if (hp == 2) {
+                    img_HP1.setBounds(2000, 0, 64, 64);
+                }
+                if (hp == 1) {
+                    img_HP2.setBounds(2000, 0, 64, 64);
+                }
                 potY[0] += 5;
                 potY[1] += 5;
                 potY[2] += 5;
-            } 
-            
+            }
+
         } catch (Exception e) {
         }
-        if(hp == 0){
-                    endSCENE.setBounds(50, 200, 1000, 250);
-                    img_HP3.setBounds(2000, 0, 64, 64);
-                    
-                }
+        if (hp == 0) {
+            endSCENE.setBounds(50, 150, 1000, 250);
+            btn_1.setBounds(355, 320, 215, 73);
+            btn_2.setBounds(525, 320, 215, 73);
+            img_HP3.setBounds(2000, 0, 64, 64);
+
+        }
         repaint();
     }
 
@@ -181,24 +215,19 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
         return r.nextInt((max - min) + 1) + min;
     }
 
-    public void keyTyped(KeyEvent ke) {
-    }
-
-    public void keyPressed(KeyEvent ke) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent ke) {
-
-    }
-
-    void main(char c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == btn_1) {
+            fr.dispose();
+            MyMap.main();
+            
+        }
+        if (ae.getSource() == btn_2) {
+            System.out.println("M");
+        }
     }
 
     public static void setSpeed(int speed) {
         MyMap.speed = speed;
     }
-    
+
 }

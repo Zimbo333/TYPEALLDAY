@@ -18,7 +18,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     private JPanel p1, p2, p3;
     private ImageIcon i1, i2, i3, bg;
     private JLabel lb1, logo, lb_bg;
-    private JButton btn1, btn2, btn3, btn4;
+    private JButton btn1, btn2, btn3;
     private int x = -168;
 
     public Menu() {
@@ -80,6 +80,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     public static void main(String[] args) {
         Menu menu = new Menu();
         Thread t = new Thread(menu);
+        
         t.start();
     }
 
@@ -102,14 +103,12 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btn1){
-            MyMap mm = new MyMap();
-            mm.main();
+            MyMap.main();
             fr.dispose();
         }
-        if (ae.getSource() == btn2){
-            MyMap mm = new MyMap();     
-            mm.setSpeed(50);
-            mm.main();
+        if (ae.getSource() == btn2){    
+            MyMap.setSpeed(50);
+            MyMap.main();
             fr.dispose();
         }
     }
