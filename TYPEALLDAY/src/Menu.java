@@ -1,5 +1,6 @@
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 /*
@@ -11,7 +12,7 @@ import javax.swing.*;
  *
  * @author Acer
  */
-public class Menu extends JPanel implements Runnable {
+public class Menu extends JPanel implements Runnable, ActionListener {
 
     private JFrame fr;
     private JPanel p1, p2, p3;
@@ -22,7 +23,7 @@ public class Menu extends JPanel implements Runnable {
 
     public Menu() {
         fr = new JFrame("TypeAllDay");
-
+        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
         p2 = new JPanel();
         p3 = new JPanel();
 
@@ -36,7 +37,9 @@ public class Menu extends JPanel implements Runnable {
         lb_bg = new JLabel(bg);
         logo = new JLabel(i1);
         btn1 = new JButton(i2);
+        btn1.setCursor(cursor);
         btn2 = new JButton(i3);
+        btn2.setCursor(cursor);
         btn3 = new JButton("Add");
 
         fr.add(logo);
@@ -64,6 +67,9 @@ public class Menu extends JPanel implements Runnable {
         fr.setLocationRelativeTo(null); //ให้JFrame ขึ้นตรงกลางหน้าจอ
         fr.setVisible(true);
         fr.setResizable(false);         //ปรับขนาดไม่ได้
+        
+        btn1.addActionListener(this);
+        btn2.addActionListener(this);
 
     }
 
@@ -93,4 +99,20 @@ public class Menu extends JPanel implements Runnable {
         }
         repaint();
     }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == btn1){
+            MyMap mm = new MyMap();
+            mm.main();
+            fr.dispose();
+        }
+        if (ae.getSource() == btn2){
+            MyMap mm = new MyMap();     
+            mm.setSpeed(50);
+            mm.main();
+            fr.dispose();
+        }
+    }
+    
 }
