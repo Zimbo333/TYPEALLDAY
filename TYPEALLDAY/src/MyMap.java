@@ -16,6 +16,10 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
     static int hp = 3;
     static ImageIcon game_over = new ImageIcon("src/images/game_over.png");
     static ImageIcon img_hp = new ImageIcon("src/images/hp.gif");
+    static ImageIcon oong_b = new ImageIcon("src/images/sprite_oong.gif");//รูปอ๋องดำ
+    static ImageIcon oong_w = new ImageIcon("src/images/sprite_white_oong.gif");//รูปอ๋องขาว
+    static ImageIcon oong_b_dm = new ImageIcon("src/images/sprite_oong_dmg.png");//รูปอ๋องดำโดนตี
+    static ImageIcon oong_w_dm = new ImageIcon("src/images/sprite_white_oong_dmg.png");//รูปอ๋องขาวโดนตี
     static JLabel text1 = new JLabel(words[getRandomNumberInRange(0, 900)]);
     static JLabel text2 = new JLabel(words[getRandomNumberInRange(0, 900)]);
     static JLabel text3 = new JLabel(words[getRandomNumberInRange(0, 900)]);
@@ -23,6 +27,8 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
     static JLabel img_HP1 = new JLabel(img_hp);
     static JLabel img_HP2 = new JLabel(img_hp);
     static JLabel img_HP3 = new JLabel(img_hp);
+    static JLabel img_oong_b = new JLabel(oong_b);//เอารูปใส่JLabel
+    static JLabel img_oong_w = new JLabel(oong_w);//เอารูปใส่JLabel
     static int potX[] = {getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700)};
     static int potY[] = {-200, -400, -600};
     static int speed = 100;
@@ -33,10 +39,6 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
         MyMap Map = new MyMap();
         
         ImageIcon bg = new ImageIcon("src/images/" + backG[i] + ".jpg"); //รูปพื้นหลังที่สุ่มเสร็จแล้วเอามาเก็บในตัวแปร
-        ImageIcon oong_b = new ImageIcon("src/images/sprite_oong.gif");//รูปอ๋องดำ
-        ImageIcon oong_w = new ImageIcon("src/images/sprite_white_oong.gif");//รูปอ๋องขาว
-        JLabel img_oong_b = new JLabel(oong_b);//เอารูปใส่JLabel
-        JLabel img_oong_w = new JLabel(oong_w);//เอารูปใส่JLabel
         JLabel bg_lb = new JLabel(bg);//เอารูปใส่JLabel game_over
         
 
@@ -96,49 +98,61 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
 
                 //check text
                 if (answer.getText().equals(text1.getText())) {
+                    img_oong_w.setIcon(oong_w_dm);
                     potY[0] = -300;
                     if(speed > 40){speed--;}
                     answer.setText("");
                 }
+                
                 if (answer.getText().equals(text2.getText())) {
+                    img_oong_w.setIcon(oong_w_dm);
                     potY[1] = -300;
                     if(speed > 40){speed--;}
                     answer.setText("");
                 }
                 if (answer.getText().equals(text3.getText())) {
+                    img_oong_w.setIcon(oong_w_dm);
                     potY[2] = -300;
                     if(speed > 40){speed--;}
                     answer.setText("");
                 }
+                //change รูปอ๋องขาวที่โดนตีให้กับมาเป็นตัวเดิม
+                if(potY[0] == -295|| potY[1] == -295|| potY[2] == -295){img_oong_w.setIcon(oong_w);}
                 //text down floor to HP decrease
-                if (potY[0] > 425) {
-                    hp -= 1;
-                    potY[0] = -135;
+                if (potY[0] > 425) {                  
+                    img_oong_b.setIcon(oong_b_dm);
+                    potY[0] = -140;
                     potX[0] = getRandomNumberInRange(100, 700);
+                    hp -= 1;
                 }
                 //change text
-                if (potY[0] == -130) {
+                if (potY[0] == -135) {
                     text1.setText(words[getRandomNumberInRange(0, 900)]);
+                    img_oong_b.setIcon(oong_b);
                 }
                 //text down floor to HP decrease
                 if (potY[1] > 425) {
-                    potY[1] = -130;
+                    img_oong_b.setIcon(oong_b_dm);
+                    potY[1] = -140;
                     potX[1] = getRandomNumberInRange(100, 700);
                     hp -= 1;
                 }
                 //change text
                 if (potY[1] == -135) {
                     text2.setText(words[getRandomNumberInRange(0, 900)]);
+                    img_oong_b.setIcon(oong_b);
                 }
                 //text down floor to HP decrease
                 if (potY[2] > 425) {
-                    potY[2] = -135;
+                    img_oong_b.setIcon(oong_b_dm);
+                    potY[2] = -140;
                     potX[2] = getRandomNumberInRange(100, 700);
                     hp -= 1;
                 }
                 //change text
-                if (potY[2] == -130) {
+                if (potY[2] == -135) {
                     text3.setText(words[getRandomNumberInRange(0, 900)]);
+                    img_oong_b.setIcon(oong_b);
                 }
                if(hp == 2){img_HP1.setBounds(2000, 0, 64, 64);}
                if(hp == 1){img_HP2.setBounds(2000, 0, 64, 64);}
