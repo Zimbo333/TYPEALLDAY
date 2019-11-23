@@ -69,6 +69,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         fr.setResizable(false);         //ปรับขนาดไม่ได้
         
         btn1.addActionListener(this);
+        btn2.addActionListener(this);
 
     }
 
@@ -106,5 +107,12 @@ public class Menu extends JPanel implements Runnable, ActionListener {
             mm.main();
             fr.dispose();
         }
+        if (ae.getSource() == btn2){
+            MyMap mm = new MyMap();     
+            mm.setSpeed(50);
+            mm.main();
+            fr.dispose();
+        }
     }
+    
 }

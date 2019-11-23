@@ -13,13 +13,16 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
     static String[] backG = {"bg", "bg_1", "bg_2"}; //เอาไว้ random พื้นหลังตอนเปิดเกม
     static int i = getRandomNumberInRange(0, 2); //เลขที่ได้จาการ Random
     static JTextField answer = new JTextField(10);
-    static int hp = 5;
+    static int hp = 3;
     static JLabel text1 = new JLabel(words[getRandomNumberInRange(0, 900)]);
     static JLabel text2 = new JLabel(words[getRandomNumberInRange(0, 900)]);
     static JLabel text3 = new JLabel(words[getRandomNumberInRange(0, 900)]);
     static JLabel HP_bar = new JLabel(Integer.toString(hp));
+    static JLabel endSCENE = new JLabel("GAME OVER");
     static int potX[] = {getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700)};
     static int potY[] = {-100, -300, -500};
+    static int speed = 100;
+    static int status = 0;
 
     public static void main() {
         MyMap Map = new MyMap();
@@ -30,6 +33,7 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
         JLabel img_oong_b = new JLabel(oong_b);//เอารูปใส่JLabel
         JLabel img_oong_w = new JLabel(oong_w);//เอารูปใส่JLabel
         JLabel bg_lb = new JLabel(bg);//เอารูปใส่JLabel
+        
 
         fr.setSize(1100, 650);//จัดขนาดของwindow
 
@@ -42,10 +46,11 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
         fr.add(text2);
         fr.add(text3);
         fr.add(HP_bar);
+        
         fr.add(img_oong_b);
         fr.add(img_oong_w);
         fr.add(bg_lb);
-
+        endSCENE.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
         text1.setForeground(Color.white);
         text1.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
         text2.setForeground(Color.white);
@@ -69,11 +74,9 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fr.setResizable(false);
         fr.setLocationRelativeTo(null);//ทำให้ตอนรันโค้ดแล้วทำให้windowมาอยู่ตรงกลางจอ
-
     }
 
-    public void run() {
-        int speed = 100;
+    public void run() {       
         try {
             while (hp != 0) {
                 Thread.sleep(speed);
@@ -127,6 +130,9 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
                 if (potY[2] == -130) {
                     text3.setText(words[getRandomNumberInRange(0, 900)]);
                 }
+                if(hp == 0){
+                    this.status = 1;
+                }
                 HP_bar.setText(Integer.toString(hp));
                 potY[0] += 5;
                 potY[1] += 5;
@@ -163,4 +169,9 @@ public class MyMap extends JPanel implements KeyListener, Commons, Runnable {
     void main(char c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public static void setSpeed(int speed) {
+        MyMap.speed = speed;
+    }
+    
 }
