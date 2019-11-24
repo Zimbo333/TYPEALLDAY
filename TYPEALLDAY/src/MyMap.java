@@ -240,11 +240,11 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
         btn_1.setBounds(1000, 1000, 215, 73);
         btn_2.setBounds(1000, 1000, 215, 73);
         endSCENE.setBounds(1000, 1000, 1000, 250);
-        score = 0;
         img_oong_w.setIcon(oong_w);
-        scr.setText("SCORE : " +score+ "");
+        System.out.println(score);
         potX[3] = 525;
         answer.setBounds(potX[3], 450, 500, 200);
+        scr.setText("SCORE : " +""+score);
         answer.setText("");
 
         Thread t1 = new Thread(Map);
@@ -253,6 +253,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
 
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btn_1) {
+            score = 0;
             fr.dispose();
             Map = new MyMap();
             reset();
