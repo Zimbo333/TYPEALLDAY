@@ -103,6 +103,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btn1){
+            MyMap.setSpeed(100);
             MyMap.main();
             fr.dispose();
         }
