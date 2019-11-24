@@ -10,10 +10,11 @@ import javax.accessibility.AccessibleContext;
 import javax.swing.*;
 import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
+import java.awt.event.KeyListener;
 
-public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
+public class MyMap extends JPanel implements ActionListener,KeyListener, Commons, Runnable {
 
-    static String[] backG = {"bg", "bg_1", "bg_2"}; //เอาไว้ random พื้นหลังตอนเปิดเกม
+    static String[] backG = {"bg", "bg_1", "bg_2"}; //เอาไว้ randoms พื้นหลังตอนเปิดเกม
     static int i = getRandomNumberInRange(0, 2); //เลขที่ได้จาการ Random
     static int hp = 3;
     static int potX[] = {getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700)};
@@ -21,15 +22,14 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
     static int speed = 100;
     static int score = 0;
     private JFrame fr;
-    private JTextField answer;
     private ImageIcon game_over, img_hp, img_menu, img_retry, oong_b, oong_w, oong_b_dm, oong_w_dm, bg;
-    private JLabel text1, text2, text3, endSCENE, img_HP1, img_HP2, img_HP3, img_oong_b, img_oong_w, bg_lb,scr;
+    private JLabel text1, text2, text3, endSCENE, img_HP1, img_HP2, img_HP3, img_oong_b, img_oong_w, bg_lb,scr,answer;
     private JButton btn_1, btn_2;
     static MyMap Map;
 
     public MyMap() {
         fr = new JFrame();
-        answer = new JTextField(10);
+        
         bg = new ImageIcon("src/images/" + backG[i] + ".jpg"); //รูปพื้นหลังที่สุ่มเสร็จแล้วเอามาเก็บในตัวแปร
         game_over = new ImageIcon("src/images/game_over.png");
         img_hp = new ImageIcon("src/images/hp.gif");
@@ -44,6 +44,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
         text3 = new JLabel(words[getRandomNumberInRange(0, 900)]);
         scr = new JLabel("SCORE : "+score + "");
         bg_lb = new JLabel(bg);//เอารูปใส่JLabel game_over
+        answer = new JLabel("Hello");
         endSCENE = new JLabel(game_over);
         img_HP1 = new JLabel(img_hp);
         img_HP2 = new JLabel(img_hp);
@@ -55,25 +56,22 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
 
         fr.setSize(1100, 650);//จัดขนาดของwindow
 
-        JPanel p1 = new JPanel();
-
-        //set layout
-        p1.setLayout(new FlowLayout());
-        p1.add(answer);
+        
         fr.add(endSCENE);
         fr.add(btn_1);
         fr.add(btn_2);
         fr.add(text1);
         fr.add(text2);
         fr.add(text3);
+        
         fr.add(img_HP1);
         fr.add(img_HP2);
         fr.add(img_HP3);
-        fr.add(p1, BorderLayout.SOUTH);
 
         fr.add(img_oong_b);
         fr.add(img_oong_w);
         fr.add(scr);
+        fr.add(answer);
         fr.add(bg_lb);
 //        endSCENE.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
         text1.setForeground(Color.white);
@@ -82,10 +80,12 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
         text2.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
         text3.setForeground(Color.white);
         text3.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
+        answer.setForeground(Color.white);
+        answer.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
         scr.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
         scr.setForeground(new Color(228, 245, 255));
         
-        p1.setBackground(Color.black);
+        answer.setBounds(200, 200, 500, 200);
         scr.setBounds(10, 0, 300, 64);
         img_HP1.setBounds(900, 0, 64, 64);
         img_HP2.setBounds(950, 0, 64, 64);
@@ -104,7 +104,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
 
         btn_1.addActionListener(this);
         btn_2.addActionListener(this);
-
+        fr.addKeyListener(this);
 //        fr.add(meteor.paint());
         fr.setVisible(true);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -136,6 +136,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                         speed--;
                     }
                     answer.setText("");
+                    System.out.println("BOOM");
                 }
 
                 if (answer.getText().equals(text2.getText())) {
@@ -147,6 +148,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                         speed--;
                     }
                     answer.setText("");
+                    System.out.println("BOOM");
                 }
                 if (answer.getText().equals(text3.getText())) {
                     img_oong_b.setIcon(oong_b_dm);
@@ -157,6 +159,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                         speed--;
                     }
                     answer.setText("");
+                    System.out.println("BOOM");
                 }
                 //change รูปอ๋องขาวที่โดนตีให้กับมาเป็นตัวเดิม
                 if (potY[0] == -290 || potY[1] == -290 || potY[2] == -290) {
@@ -239,7 +242,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
         endSCENE.setBounds(1000, 1000, 1000, 250);
         img_oong_w.setIcon(oong_w);
         scr.setText("SCORE : "+score + "");
-        answer.setText("");
+        answer.setText("Hello");
         Thread t1 = new Thread(Map);
         t1.start();
     }
@@ -271,5 +274,26 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
     public static void setSpeed(int speed) {
         MyMap.speed = speed;
     }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+        int ch = ke.getKeyCode();
+        System.out.println(ch);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
+        int ch = ke.getKeyCode();
+        System.out.println(ch);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        int ch = ke.getKeyCode();
+        System.out.println(ch);
+        
+//        String txt = answer.getText();
+//        answer.setText(txt + "" + ch);
+        }
 
 }
