@@ -16,12 +16,13 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
 
     static String[] backG = {"bg", "bg_1", "bg_2"}; //เอาไว้ randoms พื้นหลังตอนเปิดเกม
     static int i = getRandomNumberInRange(0, 2); //เลขที่ได้จาการ Random
-    static int hp = 3;
+    
     static int potX[] = {getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), 525};
     static int potY[] = {-200, -400, -600};
     static int speed = 100;
     static int score = 0;
     private static JFrame fr;
+    private int hp = 3;
     private ImageIcon game_over, img_hp, img_menu, img_retry, oong_b, oong_w, oong_b_dm, oong_w_dm, bg;
     private JLabel text1, text2, text3, endSCENE, img_HP1, img_HP2, img_HP3, img_oong_b, img_oong_w, bg_lb, scr, answer;
     private JButton btn_1, btn_2;
@@ -79,7 +80,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
         text2.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
         text3.setForeground(Color.white);
         text3.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
-        answer.setForeground(Color.white);
+        answer.setForeground(new Color(46,127,6));
         answer.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
         scr.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
         scr.setForeground(new Color(228, 245, 255));
@@ -112,11 +113,6 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
         fr.setLocationRelativeTo(null);//ทำให้ตอนรันโค้ดแล้วทำให้windowมาอยู่ตรงกลางจอ
     }
 
-    public static void main() {
-        Map = new MyMap();
-        Map.reset();
-
-    }
 
     public void run() {
         try {
@@ -229,6 +225,10 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
     }
 
     public void reset() {
+        fr.dispose();
+        Map = new MyMap();
+        Thread t1 = new Thread(Map);
+        t1.start();
         hp = 3;
         potY[0] = -200;
         potY[1] = -400;
@@ -240,31 +240,30 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
         btn_1.setBounds(1000, 1000, 215, 73);
         btn_2.setBounds(1000, 1000, 215, 73);
         endSCENE.setBounds(1000, 1000, 1000, 250);
+        
         img_oong_w.setIcon(oong_w);
-        System.out.println(score);
+        scr.setText("SCORE : " +score + "");
         potX[3] = 525;
         answer.setBounds(potX[3], 450, 500, 200);
-        scr.setText("SCORE : " +""+score);
         answer.setText("");
+        
 
-        Thread t1 = new Thread(Map);
-        t1.start();
+
     }
 
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btn_1) {
             score = 0;
             fr.dispose();
-            Map = new MyMap();
             reset();
+            
 
         }
         if (ae.getSource() == btn_2) {
+            score = 0;
             Menu menu = new Menu();
             Thread t = new Thread(menu);
             t.start();
-            Thread t1 = new Thread(Map);
-            t1.start();
             fr.dispose();
         }
     }

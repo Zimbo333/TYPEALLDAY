@@ -76,14 +76,6 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     public void paintComponent(Graphics g) {
 
     }
-
-    public static void main(String[] args) {
-        Menu menu = new Menu();
-        Thread t = new Thread(menu);
-        
-        t.start();
-    }
-
     public void run() {
 
         try {
@@ -104,12 +96,14 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btn1){
             MyMap.setSpeed(100);
-            MyMap.main();
+            MyMap Map = new MyMap();
+            Map.reset();
             fr.dispose();
         }
         if (ae.getSource() == btn2){    
             MyMap.setSpeed(50);
-            MyMap.main();
+            MyMap Map = new MyMap();
+            Map.reset();
             fr.dispose();
         }
     }
