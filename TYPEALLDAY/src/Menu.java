@@ -67,15 +67,13 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         fr.setLocationRelativeTo(null); //ให้JFrame ขึ้นตรงกลางหน้าจอ
         fr.setVisible(true);
         fr.setResizable(false);         //ปรับขนาดไม่ได้
-        
+
         btn1.addActionListener(this);
         btn2.addActionListener(this);
 
     }
 
-    public void paintComponent(Graphics g) {
-
-    }
+    @Override
     public void run() {
 
         try {
@@ -87,25 +85,25 @@ public class Menu extends JPanel implements Runnable, ActionListener {
                     x = -168;
                 }
             }
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
         }
         repaint();
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == btn1){
+        if (ae.getSource() == btn1) {
             MyMap.setSpeed(100);
             MyMap Map = new MyMap();
             Map.reset();
             fr.dispose();
         }
-        if (ae.getSource() == btn2){    
+        if (ae.getSource() == btn2) {
             MyMap.setSpeed(50);
             MyMap Map = new MyMap();
             Map.reset();
             fr.dispose();
         }
     }
-    
+
 }
