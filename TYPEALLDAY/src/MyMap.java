@@ -6,7 +6,10 @@ import java.text.AttributedCharacterIterator;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.accessibility.AccessibleContext;
 import javax.swing.*;
+import javax.swing.event.EventListenerList;
+import javax.swing.plaf.ComponentUI;
 
 public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
 
@@ -16,12 +19,12 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
     static int potX[] = {getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700)};
     static int potY[] = {-200, -400, -600};
     static int speed = 100;
-    private boolean check = true;
     private JFrame fr;
     private JTextField answer;
     private ImageIcon game_over, img_hp, img_menu, img_retry, oong_b, oong_w, oong_b_dm, oong_w_dm, bg;
     private JLabel text1, text2, text3, endSCENE, img_HP1, img_HP2, img_HP3, img_oong_b, img_oong_w, bg_lb;
     private JButton btn_1, btn_2;
+    static MyMap Map;
 
     public MyMap() {
         fr = new JFrame();
@@ -104,14 +107,14 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
     }
 
     public static void main() {
-        MyMap Map = new MyMap();
-        Thread t1 = new Thread(Map);
-        t1.start();
+        Map = new MyMap();
+        Map.reset();
+
     }
 
     public void run() {
         try {
-            while (check) {
+            while (hp != 0) {
                 Thread.sleep(speed);
                 text1.setBounds(potX[0], potY[0], 1000, 250);
                 text2.setBounds(potX[1], potY[1], 1000, 250);
@@ -189,14 +192,6 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                 if (hp == 1) {
                     img_HP2.setBounds(2000, 0, 64, 64);
                 }
-                if (hp == 0) {
-                    endSCENE.setBounds(50, 150, 1000, 250);
-                    btn_1.setBounds(355, 320, 215, 73);
-                    btn_2.setBounds(525, 320, 215, 73);
-                    img_HP3.setBounds(2000, 0, 64, 64);
-                    check = false;
-                    System.out.println(check);
-                }
 
                 potY[0] += 5;
                 potY[1] += 5;
@@ -205,22 +200,46 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
 
         } catch (Exception e) {
         }
+        if (hp == 0) {
+            endSCENE.setBounds(50, 150, 1000, 250);
+            btn_1.setBounds(355, 320, 215, 73);
+            btn_2.setBounds(525, 320, 215, 73);
+            img_HP3.setBounds(2000, 0, 64, 64);
+        }
 
         repaint();
     }
+
+    public void reset() {
+        hp = 3;
+        potY[0] = -200;
+        potY[1] = -400;
+        potY[2] = -600;
+        img_HP1.setBounds(900, 0, 64, 64);
+        img_HP2.setBounds(950, 0, 64, 64);
+        img_HP3.setBounds(1000, 0, 64, 64);
+        btn_1.setBounds(1000, 1000, 215, 73);
+        btn_2.setBounds(1000, 1000, 215, 73);
+        endSCENE.setBounds(1000, 1000, 1000, 250);
+        img_oong_w.setIcon(oong_w);
+        Thread t1 = new Thread(Map);
+        t1.start();
+    }
+
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btn_1) {
-            check = true;
-            System.out.println(check);
-
+            reset();
         }
         if (ae.getSource() == btn_2) {
             Menu menu = new Menu();
             Thread t = new Thread(menu);
             t.start();
+            Thread t1 = new Thread(Map);
+            t1.start();
             fr.dispose();
         }
     }
+
     private static int getRandomNumberInRange(int min, int max) {//เอาไว้สุ่มเลข
         if (min >= max) {
             throw new IllegalArgumentException("max must be greater than min");
@@ -230,8 +249,6 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;
     }
-
-
 
     public static void setSpeed(int speed) {
         MyMap.speed = speed;
