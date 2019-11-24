@@ -1,15 +1,8 @@
 
 import java.awt.*;
-import static java.awt.BorderLayout.SOUTH;
 import java.awt.event.*;
-import java.text.AttributedCharacterIterator;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.accessibility.AccessibleContext;
 import javax.swing.*;
-import javax.swing.event.EventListenerList;
-import javax.swing.plaf.ComponentUI;
 import java.awt.event.KeyListener;
 
 public class MyMap extends JPanel implements ActionListener, KeyListener, Commons, Runnable {
