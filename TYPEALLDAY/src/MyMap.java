@@ -19,10 +19,11 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
     static int potX[] = {getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700)};
     static int potY[] = {-200, -400, -600};
     static int speed = 100;
+    static int score = 0;
     private JFrame fr;
     private JTextField answer;
     private ImageIcon game_over, img_hp, img_menu, img_retry, oong_b, oong_w, oong_b_dm, oong_w_dm, bg;
-    private JLabel text1, text2, text3, endSCENE, img_HP1, img_HP2, img_HP3, img_oong_b, img_oong_w, bg_lb;
+    private JLabel text1, text2, text3, endSCENE, img_HP1, img_HP2, img_HP3, img_oong_b, img_oong_w, bg_lb,scr;
     private JButton btn_1, btn_2;
     static MyMap Map;
 
@@ -41,6 +42,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
         text1 = new JLabel(words[getRandomNumberInRange(0, 900)]);
         text2 = new JLabel(words[getRandomNumberInRange(0, 900)]);
         text3 = new JLabel(words[getRandomNumberInRange(0, 900)]);
+        scr = new JLabel("SCORE : "+score + "");
         bg_lb = new JLabel(bg);//เอารูปใส่JLabel game_over
         endSCENE = new JLabel(game_over);
         img_HP1 = new JLabel(img_hp);
@@ -71,6 +73,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
 
         fr.add(img_oong_b);
         fr.add(img_oong_w);
+        fr.add(scr);
         fr.add(bg_lb);
 //        endSCENE.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
         text1.setForeground(Color.white);
@@ -79,8 +82,11 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
         text2.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
         text3.setForeground(Color.white);
         text3.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
+        scr.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+        scr.setForeground(new Color(228, 245, 255));
+        
         p1.setBackground(Color.black);
-
+        scr.setBounds(10, 0, 300, 64);
         img_HP1.setBounds(900, 0, 64, 64);
         img_HP2.setBounds(950, 0, 64, 64);
         img_HP3.setBounds(1000, 0, 64, 64);
@@ -124,6 +130,8 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                 if (answer.getText().equals(text1.getText())) {
                     img_oong_b.setIcon(oong_b_dm);
                     potY[0] = -300;
+                    score += 100;
+                    scr.setText("SCORE : "+score + "");
                     if (speed > 40) {
                         speed--;
                     }
@@ -133,6 +141,8 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                 if (answer.getText().equals(text2.getText())) {
                     img_oong_b.setIcon(oong_b_dm);
                     potY[1] = -300;
+                    score += 100;
+                    scr.setText("SCORE : "+score + "");
                     if (speed > 40) {
                         speed--;
                     }
@@ -141,6 +151,8 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                 if (answer.getText().equals(text3.getText())) {
                     img_oong_b.setIcon(oong_b_dm);
                     potY[2] = -300;
+                    score += 100;
+                    scr.setText("SCORE : "+score + "");
                     if (speed > 40) {
                         speed--;
                     }
@@ -218,6 +230,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
         potY[0] = -200;
         potY[1] = -400;
         potY[2] = -600;
+        score = 0;
         img_HP1.setBounds(900, 0, 64, 64);
         img_HP2.setBounds(950, 0, 64, 64);
         img_HP3.setBounds(1000, 0, 64, 64);
@@ -225,6 +238,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
         btn_2.setBounds(1000, 1000, 215, 73);
         endSCENE.setBounds(1000, 1000, 1000, 250);
         img_oong_w.setIcon(oong_w);
+        scr.setText("SCORE : "+score + "");
         answer.setText("");
         Thread t1 = new Thread(Map);
         t1.start();
