@@ -150,39 +150,42 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                 if (potY[0] == -290 || potY[1] == -290 || potY[2] == -290) {
                     img_oong_b.setIcon(oong_b);
                 }
+                //------TEXT1------
                 //text down floor to HP decrease
                 if (potY[0] > 425) {
                     img_oong_w.setIcon(oong_w_dm);
-                    potY[0] = -145;
+                    potY[0] = -165;
                     potX[0] = getRandomNumberInRange(100, 700);
                     hp -= 1;
                 }
                 //change text
-                if (potY[0] == -135) {
+                if (potY[0] == -155) {
                     text1.setText(words[getRandomNumberInRange(0, 900)]);
                     img_oong_w.setIcon(oong_w);
                 }
+                //------TEXT2------
                 //text down floor to HP decrease
                 if (potY[1] > 425) {
                     img_oong_w.setIcon(oong_w_dm);
-                    potY[1] = -145;
+                    potY[1] = -165;
                     potX[1] = getRandomNumberInRange(100, 700);
                     hp -= 1;
                 }
                 //change text
-                if (potY[1] == -135) {
+                if (potY[1] == -155) {
                     text2.setText(words[getRandomNumberInRange(0, 900)]);
                     img_oong_w.setIcon(oong_w);
                 }
+                //------TEXT3------
                 //text down floor to HP decrease
                 if (potY[2] > 425) {
                     img_oong_w.setIcon(oong_w_dm);
-                    potY[2] = -145;
+                    potY[2] = -165;
                     potX[2] = getRandomNumberInRange(100, 700);
                     hp -= 1;
                 }
                 //change text
-                if (potY[2] == -135) {
+                if (potY[2] == -155) {
                     text3.setText(words[getRandomNumberInRange(0, 900)]);
                     img_oong_w.setIcon(oong_w);
                 }
@@ -222,6 +225,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
         btn_2.setBounds(1000, 1000, 215, 73);
         endSCENE.setBounds(1000, 1000, 1000, 250);
         img_oong_w.setIcon(oong_w);
+        answer.setText("");
         Thread t1 = new Thread(Map);
         t1.start();
     }
