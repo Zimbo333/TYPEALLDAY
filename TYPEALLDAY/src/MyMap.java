@@ -12,15 +12,16 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
 
     static String[] backG = {"bg", "bg_1", "bg_2"}; //เอาไว้ random พื้นหลังตอนเปิดเกม
     static int i = getRandomNumberInRange(0, 2); //เลขที่ได้จาการ Random
-    static int hp = 3;
+    static int hp = 1;
     static int potX[] = {getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700)};
     static int potY[] = {-200, -400, -600};
     static int speed = 100;
+    static int score = 0;
     private boolean check = true;
     private JFrame fr;
     private JTextField answer;
     private ImageIcon game_over, img_hp, img_menu, img_retry, oong_b, oong_w, oong_b_dm, oong_w_dm, bg;
-    private JLabel text1, text2, text3, endSCENE, img_HP1, img_HP2, img_HP3, img_oong_b, img_oong_w, bg_lb;
+    private JLabel text1, text2, text3, endSCENE, img_HP1, img_HP2, img_HP3, img_oong_b, img_oong_w, bg_lb, scr;
     private JButton btn_1, btn_2;
 
     public MyMap() {
@@ -47,7 +48,8 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
         img_oong_w = new JLabel(oong_w);//เอารูปใส่JLabel
         btn_1 = new JButton(img_retry);
         btn_2 = new JButton(img_menu);
-
+        scr = new JLabel("SCORE : "+score + "");
+        //answer.setVisible(false);
         fr.setSize(1100, 650);//จัดขนาดของwindow
 
         JPanel p1 = new JPanel();
@@ -68,7 +70,9 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
 
         fr.add(img_oong_b);
         fr.add(img_oong_w);
+        fr.add(scr);
         fr.add(bg_lb);
+
 //        endSCENE.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
         text1.setForeground(Color.white);
         text1.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
@@ -76,8 +80,11 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
         text2.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
         text3.setForeground(Color.white);
         text3.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
+        scr.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+        scr.setForeground(new Color(228, 245, 255));
         p1.setBackground(Color.black);
 
+        scr.setBounds(10, 0, 200, 64);
         img_HP1.setBounds(900, 0, 64, 64);
         img_HP2.setBounds(950, 0, 64, 64);
         img_HP3.setBounds(1000, 0, 64, 64);
@@ -121,6 +128,8 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                 if (answer.getText().equals(text1.getText())) {
                     img_oong_b.setIcon(oong_b_dm);
                     potY[0] = -300;
+                    score += 100;
+                    scr.setText("SCORE : "+score + "");
                     if (speed > 40) {
                         speed--;
                     }
@@ -130,6 +139,8 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                 if (answer.getText().equals(text2.getText())) {
                     img_oong_b.setIcon(oong_b_dm);
                     potY[1] = -300;
+                    score += 100;
+                    scr.setText("SCORE : "+score + "");
                     if (speed > 40) {
                         speed--;
                     }
@@ -138,6 +149,8 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
                 if (answer.getText().equals(text3.getText())) {
                     img_oong_b.setIcon(oong_b_dm);
                     potY[2] = -300;
+                    score += 100;
+                    scr.setText("SCORE : "+score + "");
                     if (speed > 40) {
                         speed--;
                     }
@@ -208,6 +221,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
 
         repaint();
     }
+
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btn_1) {
             check = true;
@@ -221,6 +235,7 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
             fr.dispose();
         }
     }
+
     private static int getRandomNumberInRange(int min, int max) {//เอาไว้สุ่มเลข
         if (min >= max) {
             throw new IllegalArgumentException("max must be greater than min");
@@ -230,8 +245,6 @@ public class MyMap extends JPanel implements ActionListener, Commons, Runnable {
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;
     }
-
-
 
     public static void setSpeed(int speed) {
         MyMap.speed = speed;
