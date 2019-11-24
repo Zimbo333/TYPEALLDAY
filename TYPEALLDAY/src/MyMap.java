@@ -290,8 +290,8 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
             potX[3] = 525;
             answer.setBounds(potX[3], 450, 1000, 200);
         } else if (c == 16) {
-            ch = ke.getKeyChar();
-            ch = Character.toUpperCase(ch);
+//            ch = ke.getKeyChar();
+//            ch = Character.toUpperCase(ch);
         }
     }
 
