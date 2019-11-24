@@ -283,16 +283,23 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
 
     @Override
     public void keyPressed(KeyEvent ke) {
-        char ch = ke.getKeyChar();
+        char ch;
         int c = ke.getKeyCode();
-        if (c != 8) {
+        
+        if (c != 8 && c != 16) {
+            ch = ke.getKeyChar();
             answer.setText(answer.getText() + "" + ch);
             potX[3] -= 10;
             answer.setBounds(potX[3], 450, 500, 200);
-        } else {
+        } 
+        else if(c == 8){
             answer.setText("");
             potX[3] = 525;
-            answer.setBounds(potX[3], 450, 1000, 200);
+            answer.setBounds(potX[3], 450, 1000, 200);  
+        }
+        else if(c == 16){
+            ch = ke.getKeyChar();
+            ch = Character.toUpperCase(ch);
         }
     }
 
