@@ -12,7 +12,7 @@ import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
 import java.awt.event.KeyListener;
 
-public class MyMap extends JPanel implements ActionListener,KeyListener, Commons, Runnable {
+public class MyMap extends JPanel implements ActionListener, KeyListener, Commons, Runnable {
 
     static String[] backG = {"bg", "bg_1", "bg_2"}; //เอาไว้ randoms พื้นหลังตอนเปิดเกม
     static int i = getRandomNumberInRange(0, 2); //เลขที่ได้จาการ Random
@@ -23,13 +23,13 @@ public class MyMap extends JPanel implements ActionListener,KeyListener, Commons
     static int score = 0;
     private JFrame fr;
     private ImageIcon game_over, img_hp, img_menu, img_retry, oong_b, oong_w, oong_b_dm, oong_w_dm, bg;
-    private JLabel text1, text2, text3, endSCENE, img_HP1, img_HP2, img_HP3, img_oong_b, img_oong_w, bg_lb,scr,answer;
+    private JLabel text1, text2, text3, endSCENE, img_HP1, img_HP2, img_HP3, img_oong_b, img_oong_w, bg_lb, scr, answer;
     private JButton btn_1, btn_2;
     static MyMap Map;
 
     public MyMap() {
         fr = new JFrame();
-        
+
         bg = new ImageIcon("src/images/" + backG[i] + ".jpg"); //รูปพื้นหลังที่สุ่มเสร็จแล้วเอามาเก็บในตัวแปร
         game_over = new ImageIcon("src/images/game_over.png");
         img_hp = new ImageIcon("src/images/hp.gif");
@@ -42,7 +42,7 @@ public class MyMap extends JPanel implements ActionListener,KeyListener, Commons
         text1 = new JLabel(words[getRandomNumberInRange(0, 900)]);
         text2 = new JLabel(words[getRandomNumberInRange(0, 900)]);
         text3 = new JLabel(words[getRandomNumberInRange(0, 900)]);
-        scr = new JLabel("SCORE : "+score + "");
+        scr = new JLabel("SCORE : " + score + "");
         bg_lb = new JLabel(bg);//เอารูปใส่JLabel game_over
         answer = new JLabel("Hello");
         endSCENE = new JLabel(game_over);
@@ -56,14 +56,13 @@ public class MyMap extends JPanel implements ActionListener,KeyListener, Commons
 
         fr.setSize(1100, 650);//จัดขนาดของwindow
 
-        
         fr.add(endSCENE);
         fr.add(btn_1);
         fr.add(btn_2);
         fr.add(text1);
         fr.add(text2);
         fr.add(text3);
-        
+
         fr.add(img_HP1);
         fr.add(img_HP2);
         fr.add(img_HP3);
@@ -84,7 +83,7 @@ public class MyMap extends JPanel implements ActionListener,KeyListener, Commons
         answer.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
         scr.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
         scr.setForeground(new Color(228, 245, 255));
-        
+
         answer.setBounds(200, 200, 500, 200);
         scr.setBounds(10, 0, 300, 64);
         img_HP1.setBounds(900, 0, 64, 64);
@@ -105,6 +104,7 @@ public class MyMap extends JPanel implements ActionListener,KeyListener, Commons
         btn_1.addActionListener(this);
         btn_2.addActionListener(this);
         fr.addKeyListener(this);
+        fr.setFocusable(true);
 //        fr.add(meteor.paint());
         fr.setVisible(true);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -131,7 +131,7 @@ public class MyMap extends JPanel implements ActionListener,KeyListener, Commons
                     img_oong_b.setIcon(oong_b_dm);
                     potY[0] = -300;
                     score += 100;
-                    scr.setText("SCORE : "+score + "");
+                    scr.setText("SCORE : " + score + "");
                     if (speed > 40) {
                         speed--;
                     }
@@ -143,7 +143,7 @@ public class MyMap extends JPanel implements ActionListener,KeyListener, Commons
                     img_oong_b.setIcon(oong_b_dm);
                     potY[1] = -300;
                     score += 100;
-                    scr.setText("SCORE : "+score + "");
+                    scr.setText("SCORE : " + score + "");
                     if (speed > 40) {
                         speed--;
                     }
@@ -154,7 +154,7 @@ public class MyMap extends JPanel implements ActionListener,KeyListener, Commons
                     img_oong_b.setIcon(oong_b_dm);
                     potY[2] = -300;
                     score += 100;
-                    scr.setText("SCORE : "+score + "");
+                    scr.setText("SCORE : " + score + "");
                     if (speed > 40) {
                         speed--;
                     }
@@ -241,7 +241,7 @@ public class MyMap extends JPanel implements ActionListener,KeyListener, Commons
         btn_2.setBounds(1000, 1000, 215, 73);
         endSCENE.setBounds(1000, 1000, 1000, 250);
         img_oong_w.setIcon(oong_w);
-        scr.setText("SCORE : "+score + "");
+        scr.setText("SCORE : " + score + "");
         answer.setText("Hello");
         Thread t1 = new Thread(Map);
         t1.start();
@@ -279,21 +279,24 @@ public class MyMap extends JPanel implements ActionListener,KeyListener, Commons
     public void keyPressed(KeyEvent ke) {
         int ch = ke.getKeyCode();
         System.out.println(ch);
+        System.out.println("keyTyped");
     }
 
     @Override
     public void keyReleased(KeyEvent ke) {
         int ch = ke.getKeyCode();
         System.out.println(ch);
+        System.out.println("keyTyped");
     }
 
     @Override
     public void keyTyped(KeyEvent ke) {
         int ch = ke.getKeyCode();
         System.out.println(ch);
-        
+        System.out.println("keyTyped");
+
 //        String txt = answer.getText();
 //        answer.setText(txt + "" + ch);
-        }
+    }
 
 }
