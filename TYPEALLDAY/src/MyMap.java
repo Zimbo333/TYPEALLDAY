@@ -36,7 +36,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
         text1 = new JLabel(words[getRandomNumberInRange(0, 900)]);
         text2 = new JLabel(words[getRandomNumberInRange(0, 900)]);
         text3 = new JLabel(words[getRandomNumberInRange(0, 900)]);
-        scr = new JLabel("SCORE : " + score + "");
+        scr = new JLabel("SCORE : " + score + "");//คะแนน
         bg_lb = new JLabel(bg);//เอารูปใส่JLabel game_over
         answer = new JLabel();
         endSCENE = new JLabel(game_over);
@@ -78,16 +78,16 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
         scr.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
         scr.setForeground(new Color(228, 245, 255));
 
-        answer.setBounds(potX[3], 450, 1000, 200);
-        scr.setBounds(10, 0, 300, 64);
-        img_HP1.setBounds(900, 0, 64, 64);
-        img_HP2.setBounds(950, 0, 64, 64);
-        img_HP3.setBounds(1000, 0, 64, 64);
-        btn_1.setBounds(1000, 1000, 215, 73);
-        btn_2.setBounds(1000, 1000, 215, 73);
-        endSCENE.setBounds(1000, 1000, 1000, 250);
-        img_oong_b.setBounds(900, 350, 150, 250);//จัดตำแหน่งรูปกับขนาด (x,y,w,h)
-        img_oong_w.setBounds(50, 350, 150, 250);//จัดตำแหน่งรูปกับขนาด (x,y,w,h)
+        answer.setBounds(potX[3], 450, 1000, 200); //setbound = ตำแหน่ง 
+        scr.setBounds(10, 0, 300, 64);//จัดตำแหน่งรูปกับขนาด (x,y,width,height)
+        img_HP1.setBounds(900, 0, 64, 64);//จัดตำแหน่งรูปกับขนาด (x,y,width,height)
+        img_HP2.setBounds(950, 0, 64, 64);//จัดตำแหน่งรูปกับขนาด (x,y,width,height)
+        img_HP3.setBounds(1000, 0, 64, 64);//จัดตำแหน่งรูปกับขนาด (x,y,width,height)
+        btn_1.setBounds(1000, 1000, 215, 73);//จัดตำแหน่งรูปกับขนาด (x,y,width,height)
+        btn_2.setBounds(1000, 1000, 215, 73);//จัดตำแหน่งรูปกับขนาด (x,y,width,height)
+        endSCENE.setBounds(1000, 1000, 1000, 250);//จัดตำแหน่งรูปกับขนาด (x,y,width,height)
+        img_oong_b.setBounds(900, 350, 150, 250);//จัดตำแหน่งรูปกับขนาด (x,y,width,height)
+        img_oong_w.setBounds(50, 350, 150, 250);//จัดตำแหน่งรูปกับขนาด (x,y,width,height)
 
         btn_1.setBorder(BorderFactory.createEmptyBorder()); //ทำให้ปุ่มไม่มีขอบ
         btn_1.setContentAreaFilled(false);                  // ไม่มีพื้นหลังปุ่ม
@@ -164,7 +164,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
                 }
                 //change text
                 if (potY[0] == -155) {
-                    text1.setText(words[getRandomNumberInRange(0, 900)]);
+                    text1.setText(words[getRandomNumberInRange(0, 978)]);
                     img_oong_w.setIcon(oong_w);
                 }
                 //------TEXT2------
@@ -177,7 +177,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
                 }
                 //change text
                 if (potY[1] == -155) {
-                    text2.setText(words[getRandomNumberInRange(0, 900)]);
+                    text2.setText(words[getRandomNumberInRange(0, 978)]);
                     img_oong_w.setIcon(oong_w);
                 }
                 //------TEXT3------
@@ -190,7 +190,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
                 }
                 //change text
                 if (potY[2] == -155) {
-                    text3.setText(words[getRandomNumberInRange(0, 900)]);
+                    text3.setText(words[getRandomNumberInRange(0, 978)]);
                     img_oong_w.setIcon(oong_w);
                 }
                 if (hp == 2) {

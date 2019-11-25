@@ -3,15 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author Acer
- */
 public class Menu extends JPanel implements Runnable, ActionListener {
 
     private JFrame fr;
@@ -89,7 +80,6 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         }
         repaint();
     }
-
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btn1) {
