@@ -12,7 +12,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     private JButton btn1, btn2, btn3, btn_B;
     private speed speed = new speed();
     private int x = -168;
-    private JLabel header = new JLabel("HOW TO PLAY");
+    private JLabel header = new JLabel("- HOW TO PLAY -");
     private int[] change_color = {255,0,0};
     private int i = 0;
     public Menu() {
@@ -98,9 +98,8 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         fr.add(header);
         fr.add(lb_bg);
         
-        header.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+        header.setFont(new Font("Comic Sans MS", Font.BOLD, 35));
         header.setForeground(new Color(change_color[0], change_color[1], change_color[2]));
-        header.setBounds(200, 0, 300, 100);
         fr.setLocationRelativeTo(null);
         lb_bg.setBounds(x, 0, 1000, 630);
         fr.setVisible(true);
@@ -114,7 +113,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         // ไม่มีพื้นหลังปุ่ม
 
         img_bg.setBounds(x, 0, 1000, 630);    //กำหนดตำแหน่งและขนาด 
-        header.setBounds(70, 70, 347, 159);   //กำหนดตำแหน่งและขนาด
+        header.setBounds(90, 20, 347, 159);   //กำหนดตำแหน่งและขนาด
         btn_B.setBounds(115, 410, 270, 97);
 //        p1.setBounds(630, 100, 500, 500);
         con1.setBounds(5, 125, 500, 200); //กำหนดตำแน่งและขนาด
@@ -132,22 +131,22 @@ public class Menu extends JPanel implements Runnable, ActionListener {
                 Thread.sleep(10);
                 lb_bg.setBounds(x, 0, 1000, 630);
                 x -= 5;
-                 if (change_color[0] >= 255 && change_color[1] < 255 && change_color[2] < 255) {
+                 if (change_color[0] >= 255 && change_color[1] < 255 && change_color[2] == 0) {
                     change_color[1]++;
                 }
-                if (change_color[0] != 0 && change_color[1] >= 255 && change_color[2] < 255) {
+                 else if (change_color[0] != 0 && change_color[1] >= 255 && change_color[2] == 0) {
                     change_color[0]--;
                 }
-                if (change_color[0] == 0 && change_color[1] >= 255 && change_color[2] < 255) {
+                 else if (change_color[0] == 0 && change_color[1] >= 255 && change_color[2] < 255) {
                     change_color[2]++;
                 }
-                if (change_color[0] == 0 && change_color[1] != 0 && change_color[2] >= 255) {
+                 else if (change_color[0] == 0 && change_color[1] != 0 && change_color[2] >= 255) {
                     change_color[1]--;
                 }
-                if (change_color[0] < 255 && change_color[1] == 0 && change_color[2] >= 255) {
+                 else if (change_color[0] < 255 && change_color[1] == 0 && change_color[2] >= 255) {
                     change_color[0]++;
                 }
-                if (change_color[0] >= 255 && change_color[1] == 0 && change_color[2] != 0) {
+                 else if (change_color[0] >= 255 && change_color[1] == 0 && change_color[2] != 0) {
                     change_color[2]--;
                 }
                 header.setForeground(new Color(change_color[0], change_color[1], change_color[2]));
