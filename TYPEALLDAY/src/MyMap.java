@@ -1,9 +1,9 @@
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Random;
 import javax.swing.*;
 import java.awt.event.KeyListener;
+
 
 public class MyMap extends JPanel implements ActionListener, KeyListener, Commons, Runnable {
     
@@ -21,7 +21,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
     private ImageIcon bg;
     private JLabel text1, text2, text3, endSCENE, img_HP1, img_HP2, img_HP3, img_enemy, img_player, background_label, scr, answer;
     private JButton btn_retry, btn_menu;
-    static MyMap Map;
+    private MyMap Map;
 
     public MyMap() {
         fr = new JFrame();
@@ -113,12 +113,12 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
 
     public void run() {
         try {
+            
             while (health.getHP() != 0) {
                 Thread.sleep(speed.getSpeed());
                 text1.setBounds(potX[0], potY[0], 1000, 250);
                 text2.setBounds(potX[1], potY[1], 1000, 250);
                 text3.setBounds(potX[2], potY[2], 1000, 250);
-
                 //check text
                 if (answer.getText().equals(text1.getText())) {
                     img_enemy.setIcon(sprite.getEnemy_damage());
@@ -248,8 +248,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
         if (ae.getSource() == btn_retry) {
             score = 0;
             fr.dispose();
-            reset();
-            
+            reset();           
         }
         if (ae.getSource() == btn_menu) {
             score = 0;
