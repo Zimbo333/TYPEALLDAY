@@ -9,6 +9,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     private ImageIcon i1, i2, i3, bg, i4;
     private JLabel lb1, logo, lb_bg;
     private JButton btn1, btn2, btn4;
+    private speed speed = new speed();
     private int x = -168;
 
     public Menu() {
@@ -115,13 +116,13 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btn1) {
-            MyMap.setSpeed(100);
+            speed.setSpeed(100);
             MyMap Map = new MyMap();
             Map.reset();
             fr.dispose();
         }
         if (ae.getSource() == btn2) {
-            MyMap.setSpeed(50);
+            speed.setSpeed(50);
             MyMap Map = new MyMap();
             Map.reset();
             fr.dispose();
