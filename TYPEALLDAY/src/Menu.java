@@ -1,3 +1,4 @@
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -8,7 +9,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     private JPanel p1, p2, p3;
     private ImageIcon i1, i2, i3, bg, i4;
     private JLabel lb1, logo, lb_bg;
-    private JButton btn1, btn2, btn4;
+    private JButton btn1, btn2, btn4, btn_B;
     private speed speed = new speed();
     private int x = -168;
 
@@ -24,7 +25,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         i2 = new ImageIcon("src/images/button1.png");
         i3 = new ImageIcon("src/images/button2.png");
         i4 = new ImageIcon("src/images/howtoplay.png");
-        
+
         p1 = new JPanel();
         fr.setSize(500, 630);
         lb_bg = new JLabel(bg);
@@ -61,7 +62,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
 
         btn4.setBorder(BorderFactory.createEmptyBorder());//ทำให้ปุ่มไม่มีขอบ
         btn4.setContentAreaFilled(false);                  // ไม่มีพื้นหลังปุ่ม
-        
+
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fr.setLocationRelativeTo(null); //ให้JFrame ขึ้นตรงกลางหน้าจอ
         fr.setVisible(true);
@@ -72,31 +73,52 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         btn4.addActionListener(this);
 
     }
-    public void howtoplay(){
+
+    public void howtoplay() {
 
         JFrame fr = new JFrame("TYPEALLDAY");
         JPanel p1 = new JPanel();
-        ImageIcon i1 = new ImageIcon("src/images/con1.jpg");
+        ImageIcon con_1 = new ImageIcon("src/images/con1.png");
+        ImageIcon con_2 = new ImageIcon("src/images/con2.png");
         ImageIcon bg = new ImageIcon("src/images/bg_2.jpg");
+        ImageIcon back = new ImageIcon("src/images/back.png");
         JLabel img_bg = new JLabel(bg);
         JLabel header = new JLabel("HOW TO PLAY");
-        JLabel con1 = new JLabel(i1);
-        JLabel con2 = new JLabel();
-        JButton btn1 = new JButton();
-       
+        JLabel con1 = new JLabel(con_1);
+        JLabel con2 = new JLabel(con_2);
+        btn_B = new JButton(back);
+
         fr.setSize(500, 630);
+        //fr.add(header);
+
+        fr.add(con1);
+        fr.add(con2);
+        fr.add(btn_B);
         fr.add(lb_bg);
+
         fr.setLocationRelativeTo(null);
         lb_bg.setBounds(x, 0, 1000, 630);
         fr.setVisible(true);
         fr.setResizable(false);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        
-        
-       
-     
+
+        btn_B.setBorder(BorderFactory.createEmptyBorder());//ทำให้ปุ่มไม่มีขอบ
+        btn_B.setContentAreaFilled(false);
+        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
+        btn_B.setCursor(cursor);
+        // ไม่มีพื้นหลังปุ่ม
+
+        img_bg.setBounds(x, 0, 1000, 630);    //กำหนดตำแหน่งและขนาด 
+        header.setBounds(70, 70, 347, 159);   //กำหนดตำแหน่งและขนาด
+        btn_B.setBounds(115, 410, 270, 97);
+//        p1.setBounds(630, 100, 500, 500);
+        con1.setBounds(5, 125, 500, 200); //กำหนดตำแน่งและขนาด
+        con2.setBounds(5, 250, 500, 200);  //กำหนดตำแน่งและขนาด
+
+        btn_B.addActionListener(this);
+
     }
+
     @Override
     public void run() {
 
@@ -113,6 +135,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         }
         repaint();
     }
+
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btn1) {
@@ -132,7 +155,12 @@ public class Menu extends JPanel implements Runnable, ActionListener {
             fr.dispose();
             howtoplay();
         }
-        
+        if (ae.getSource() == btn_B) {
+            Menu menu = new Menu();
+            Thread t = new Thread(menu);
+            t.start();
+        }
+
     }
 
 }
