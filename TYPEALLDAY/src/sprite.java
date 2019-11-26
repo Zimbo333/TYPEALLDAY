@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
  *
  * @author angrykombat
  */
-public class sprite extends MyMap{
+public class sprite{
     private ImageIcon player,enemy,enemy_damage, player_damaged;
 
     public ImageIcon getEnemy_damage() {
