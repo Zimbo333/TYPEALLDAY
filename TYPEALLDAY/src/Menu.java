@@ -9,10 +9,12 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     private JPanel p1, p2, p3;
     private ImageIcon i1, i2, i3, bg, i4;
     private JLabel lb1, logo, lb_bg;
-    private JButton btn1, btn2, btn4, btn_B;
+    private JButton btn1, btn2, btn3, btn_B;
     private speed speed = new speed();
     private int x = -168;
-
+    private JLabel header = new JLabel("HOW TO PLAY");
+    private int[] change_color = {255,0,0};
+    private int i = 0;
     public Menu() {
         fr = new JFrame("TypeAllDay");
         Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
@@ -34,13 +36,13 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         btn1.setCursor(cursor);
         btn2 = new JButton(i3);
         btn2.setCursor(cursor);
-        btn4 = new JButton(i4);
-        btn4.setCursor(cursor);
+        btn3 = new JButton(i4);
+        btn3.setCursor(cursor);
 
         fr.add(logo);
         fr.add(btn1);
         fr.add(btn2);
-        fr.add(btn4);
+        fr.add(btn3);
         fr.add(p1);
         fr.add(lb_bg);
 
@@ -51,7 +53,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
 //        p1.setBounds(630, 100, 500, 500);
         btn1.setBounds(100, 250, 251, 103); //กำหนดตำแน่งและขนาด
         btn2.setBounds(130, 350, 249, 97);  //กำหนดตำแน่งและขนาด
-        btn4.setBounds(80, 440, 270, 97);
+        btn3.setBounds(80, 440, 270, 97);
 
 //        fr.setLayout(new FlowLayout());
         btn1.setBorder(BorderFactory.createEmptyBorder()); //ทำให้ปุ่มไม่มีขอบ
@@ -60,8 +62,8 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         btn2.setBorder(BorderFactory.createEmptyBorder());//ทำให้ปุ่มไม่มีขอบ
         btn2.setContentAreaFilled(false);                  // ไม่มีพื้นหลังปุ่ม
 
-        btn4.setBorder(BorderFactory.createEmptyBorder());//ทำให้ปุ่มไม่มีขอบ
-        btn4.setContentAreaFilled(false);                  // ไม่มีพื้นหลังปุ่ม
+        btn3.setBorder(BorderFactory.createEmptyBorder());//ทำให้ปุ่มไม่มีขอบ
+        btn3.setContentAreaFilled(false);                  // ไม่มีพื้นหลังปุ่ม
 
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fr.setLocationRelativeTo(null); //ให้JFrame ขึ้นตรงกลางหน้าจอ
@@ -70,7 +72,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
 
         btn1.addActionListener(this);
         btn2.addActionListener(this);
-        btn4.addActionListener(this);
+        btn3.addActionListener(this);
 
     }
 
@@ -83,7 +85,6 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         ImageIcon bg = new ImageIcon("src/images/bg_2.jpg");
         ImageIcon back = new ImageIcon("src/images/back.png");
         JLabel img_bg = new JLabel(bg);
-        JLabel header = new JLabel("HOW TO PLAY");
         JLabel con1 = new JLabel(con_1);
         JLabel con2 = new JLabel(con_2);
         btn_B = new JButton(back);
@@ -94,8 +95,12 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         fr.add(con1);
         fr.add(con2);
         fr.add(btn_B);
+        fr.add(header);
         fr.add(lb_bg);
-
+        
+        header.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+        header.setForeground(new Color(change_color[0], change_color[1], change_color[2]));
+        header.setBounds(200, 0, 300, 100);
         fr.setLocationRelativeTo(null);
         lb_bg.setBounds(x, 0, 1000, 630);
         fr.setVisible(true);
@@ -127,6 +132,25 @@ public class Menu extends JPanel implements Runnable, ActionListener {
                 Thread.sleep(10);
                 lb_bg.setBounds(x, 0, 1000, 630);
                 x -= 5;
+                 if (change_color[0] >= 255 && change_color[1] < 255 && change_color[2] < 255) {
+                    change_color[1]++;
+                }
+                if (change_color[0] != 0 && change_color[1] >= 255 && change_color[2] < 255) {
+                    change_color[0]--;
+                }
+                if (change_color[0] == 0 && change_color[1] >= 255 && change_color[2] < 255) {
+                    change_color[2]++;
+                }
+                if (change_color[0] == 0 && change_color[1] != 0 && change_color[2] >= 255) {
+                    change_color[1]--;
+                }
+                if (change_color[0] < 255 && change_color[1] == 0 && change_color[2] >= 255) {
+                    change_color[0]++;
+                }
+                if (change_color[0] >= 255 && change_color[1] == 0 && change_color[2] != 0) {
+                    change_color[2]--;
+                }
+                header.setForeground(new Color(change_color[0], change_color[1], change_color[2]));
                 if (x <= -506) {
                     x = -168;
                 }
@@ -150,8 +174,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
             Map.reset();
             fr.dispose();
         }
-        if (ae.getSource() == btn4) {
-            System.out.println("TEST");
+        if (ae.getSource() == btn3) {
             fr.dispose();
             howtoplay();
         }
