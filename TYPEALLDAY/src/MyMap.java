@@ -10,6 +10,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
     static String[] backG = {"bg", "bg_1", "bg_2"}; //เอาไว้ randoms พื้นหลังตอนเปิดเกม
     static int i = getRandomNumberInRange(0, 2); //เลขที่ได้จาการ Random
     private sprite sprite = new sprite();
+    private HP health = new HP();
     static int potX[] = {getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), 525};
     static int potY[] = {-200, -400, -600};
     static int speed = 100;
@@ -26,7 +27,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
 
         bg = new ImageIcon("src/images/" + backG[i] + ".jpg"); //รูปพื้นหลังที่สุ่มเสร็จแล้วเอามาเก็บในตัวแปร
         game_over = new ImageIcon("src/images/game_over.png");
-        img_hp = new ImageIcon("src/images/hp.gif");
+        health.setImageHP(new ImageIcon("src/images/hp.gif"));
         img_menu = new ImageIcon("src/images/menu.png");
         img_retry = new ImageIcon("src/images/retry.png");
         sprite.setEnemy(new ImageIcon("src/images/sprite_oong.gif"));//รูปอ๋องดำ
@@ -40,9 +41,9 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
         background_label = new JLabel(bg);//เอารูปใส่JLabel game_over
         answer = new JLabel();
         endSCENE = new JLabel(game_over);
-        img_HP1 = new JLabel(img_hp);
-        img_HP2 = new JLabel(img_hp);
-        img_HP3 = new JLabel(img_hp);
+        img_HP1 = new JLabel(health.getImageHP());
+        img_HP2 = new JLabel(health.getImageHP());
+        img_HP3 = new JLabel(health.getImageHP());
         img_enemy = new JLabel(sprite.getEnemy());//เอารูปใส่JLabel
         img_player = new JLabel(sprite.getPlayer());//เอารูปใส่JLabel
         btn_retry = new JButton(img_retry);
