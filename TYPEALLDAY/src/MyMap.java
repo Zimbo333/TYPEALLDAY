@@ -250,7 +250,6 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
             fr.dispose();
             reset();
             
-
         }
         if (ae.getSource() == btn_menu) {
             score = 0;
