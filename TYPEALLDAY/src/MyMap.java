@@ -9,7 +9,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
 
     private String[] backG = {"bg", "bg_1", "bg_2"}; //เอาไว้ randoms พื้นหลังตอนเปิดเกม
     private int i = getRandomNumberInRange(0, 2); //เลขที่ได้จาการ Random
-    sprite sprit = new sprite();
+    sprite sprite = new sprite();
     static int speed = 100;
     private int potX[] = {getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), getRandomNumberInRange(100, 700), 525};
     private int potY[] = {-200, -400, -600};
@@ -29,10 +29,10 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
         img_hp = new ImageIcon("src/images/hp.gif");
         img_menu = new ImageIcon("src/images/menu.png");
         img_retry = new ImageIcon("src/images/retry.png");
-        sprit.setEnemy("src/images/sprite_oong.gif");//รูปอ๋องดำ
-        sprit.setPlayer("src/images/sprite_white_oong.gif");//รูปอ๋องขาว
-        sprit.setEnemy_damage("src/images/sprite_oong_dmg.png");//รูปอ๋องดำโดนตี
-        sprit.setPlayer_damaged("src/images/sprite_white_oong_dmg.png");//รูปอ๋องขาวโดนตี
+        sprite.setEnemy("src/images/sprite_oong.gif");//รูปอ๋องดำ
+        sprite.setPlayer("src/images/sprite_white_oong.gif");//รูปอ๋องขาว
+        sprite.setEnemy_damage("src/images/sprite_oong_dmg.png");//รูปอ๋องดำโดนตี
+        sprite.setPlayer_damaged("src/images/sprite_white_oong_dmg.png");//รูปอ๋องขาวโดนตี
         text1 = new JLabel(words[getRandomNumberInRange(0, 900)]);
         text2 = new JLabel(words[getRandomNumberInRange(0, 900)]);
         text3 = new JLabel(words[getRandomNumberInRange(0, 900)]);
@@ -43,8 +43,8 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
         img_HP1 = new JLabel(img_hp);
         img_HP2 = new JLabel(img_hp);
         img_HP3 = new JLabel(img_hp);
-        img_enemy = new JLabel(sprit.getEnemy());//เอารูปใส่JLabel
-        img_player = new JLabel(sprit.getPlayer());//เอารูปใส่JLabel
+        img_enemy = new JLabel(sprite.getEnemy());//เอารูปใส่JLabel
+        img_player = new JLabel(sprite.getPlayer());//เอารูปใส่JLabel
         btn_retry = new JButton(img_retry);
         btn_menu = new JButton(img_menu);
 
@@ -117,7 +117,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
 
                 //check text
                 if (answer.getText().equals(text1.getText())) {
-                    img_enemy.setIcon(sprit.getEnemy_damage());
+                    img_enemy.setIcon(sprite.getEnemy_damage());
                     potY[0] = -300;
                     score += 100;
                     scr.setText("SCORE : " + score + "");
@@ -129,7 +129,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
                 }
 
                 if (answer.getText().equals(text2.getText())) {
-                    img_enemy.setIcon(sprit.getEnemy_damage());
+                    img_enemy.setIcon(sprite.getEnemy_damage());
                     potY[1] = -300;
                     score += 100;
                     scr.setText("SCORE : " + score + "");
@@ -140,7 +140,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
                     answer.setText("");
                 }
                 if (answer.getText().equals(text3.getText())) {
-                    img_enemy.setIcon(sprit.getEnemy_damage());
+                    img_enemy.setIcon(sprite.getEnemy_damage());
                     potY[2] = -300;
                     score += 100;
                     scr.setText("SCORE : " + score + "");
@@ -152,12 +152,12 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
                 }
                 //change รูปอ๋องขาวที่โดนตีให้กับมาเป็นตัวเดิม
                 if (potY[0] == -290 || potY[1] == -290 || potY[2] == -290) {
-                    img_enemy.setIcon(sprit.getPlayer());
+                    img_enemy.setIcon(sprite.getPlayer());
                 }
                 //------TEXT1------
                 //text down floor to HP decrease
                 if (potY[0] > 425) {
-                    img_player.setIcon(sprit.getPlayer_damaged());
+                    img_player.setIcon(sprite.getPlayer_damaged());
                     potY[0] = -165;
                     potX[0] = getRandomNumberInRange(100, 700);
                     hp -= 1;
@@ -165,12 +165,12 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
                 //change text
                 if (potY[0] == -155) {
                     text1.setText(words[getRandomNumberInRange(0, 978)]);
-                    img_player.setIcon(sprit.getPlayer());
+                    img_player.setIcon(sprite.getPlayer());
                 }
                 //------TEXT2------
                 //text down floor to HP decrease
                 if (potY[1] > 425) {
-                    img_player.setIcon(sprit.getPlayer_damaged());
+                    img_player.setIcon(sprite.getPlayer_damaged());
                     potY[1] = -165;
                     potX[1] = getRandomNumberInRange(100, 700);
                     hp -= 1;
@@ -178,12 +178,12 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
                 //change text
                 if (potY[1] == -155) {
                     text2.setText(words[getRandomNumberInRange(0, 978)]);
-                    img_player.setIcon(sprit.getEnemy());
+                    img_player.setIcon(sprite.getEnemy());
                 }
                 //------TEXT3------
                 //text down floor to HP decrease
                 if (potY[2] > 425) {
-                    img_player.setIcon(sprit.getPlayer_damaged());
+                    img_player.setIcon(sprite.getPlayer_damaged());
                     potY[2] = -165;
                     potX[2] = getRandomNumberInRange(100, 700);
                     hp -= 1;
@@ -191,7 +191,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
                 //change text
                 if (potY[2] == -155) {
                     text3.setText(words[getRandomNumberInRange(0, 978)]);
-                    img_player.setIcon(sprit.getPlayer());
+                    img_player.setIcon(sprite.getPlayer());
                 }
                 if (hp == 2) {
                     img_HP1.setBounds(2000, 0, 64, 64);
@@ -234,7 +234,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
         btn_menu.setBounds(1000, 1000, 215, 73);
         endSCENE.setBounds(1000, 1000, 1000, 250);
         
-        img_player.setIcon(sprit.getPlayer());
+        img_player.setIcon(sprite.getPlayer());
         scr.setText("SCORE : " +score + "");
         potX[3] = 525;
         answer.setBounds(potX[3], 450, 500, 200);
