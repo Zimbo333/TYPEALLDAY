@@ -11,7 +11,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     private JLabel lb1, logo, lb_bg;
     private JButton btn1, btn2, btn3;
     private int x = -168;
-
+    private speed speed = new speed();
     public Menu() {
         fr = new JFrame("TypeAllDay");
         Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
@@ -83,13 +83,13 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btn1) {
-            MyMap.setSpeed(100);
+            speed.setSpeed(100);
             MyMap Map = new MyMap();
             Map.reset();
             fr.dispose();
         }
         if (ae.getSource() == btn2) {
-            MyMap.setSpeed(50);
+            speed.setSpeed(50);
             MyMap Map = new MyMap();
             Map.reset();
             fr.dispose();

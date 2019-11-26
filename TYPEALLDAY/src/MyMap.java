@@ -10,14 +10,15 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
     private sprite sprite = new sprite();
     private HP health = new HP();
     private random random = new random();
+    private endgame end = new endgame();
+    private speed speed = new speed();
     private String[] backG = {"bg", "bg_1", "bg_2"}; //เอาไว้ randoms พื้นหลังตอนเปิดเกม
     private int i = random.getRandomNumberInRange(0, 2); //เลขที่ได้จาการ Random
     private int potX[] = {random.getRandomNumberInRange(100, 700), random.getRandomNumberInRange(100, 700), random.getRandomNumberInRange(100, 700), 525};
     static int potY[] = {-200, -400, -600};
-    static int speed = 100;
-    static int score = 0;
+    private int score = 0;
     private static JFrame fr;
-    private ImageIcon game_over, img_menu, img_retry, bg;
+    private ImageIcon bg;
     private JLabel text1, text2, text3, endSCENE, img_HP1, img_HP2, img_HP3, img_enemy, img_player, background_label, scr, answer;
     private JButton btn_retry, btn_menu;
     static MyMap Map;
@@ -26,29 +27,30 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
         fr = new JFrame();
 
         bg = new ImageIcon("src/images/" + backG[i] + ".jpg"); //รูปพื้นหลังที่สุ่มเสร็จแล้วเอามาเก็บในตัวแปร
-        game_over = new ImageIcon("src/images/game_over.png");
         health.setImageHP(new ImageIcon("src/images/hp.gif"));
-        img_menu = new ImageIcon("src/images/menu.png");
-        img_retry = new ImageIcon("src/images/retry.png");
-        sprite.setPlayer(new ImageIcon("src/images/sprite_white_oong.gif"));//รูปอ๋องขาว
-        sprite.setPlayer_damaged(new ImageIcon("src/images/sprite_white_oong_dmg.png"));//รูปอ๋องขาวโดนตี
-        sprite.setEnemy(new ImageIcon("src/images/enermy.gif"));//รูปอ๋องดำ
-        sprite.setEnemy_damage(new ImageIcon("src/images/enermy_damage.gif"));//รูปอ๋องขาว
+        end.setGame_over(new ImageIcon("src/images/game_over.png"));
+        end.setImg_menu(new ImageIcon("src/images/menu.png"));
+        end.setImg_retry(new ImageIcon("src/images/retry.png"));
+        sprite.setPlayer(new ImageIcon("src/images/player.gif"));//รูป Player
+        sprite.setPlayer_damaged(new ImageIcon("src/images/player_damage.gif"));//รูป Player โดนตี
+        sprite.setEnemy(new ImageIcon("src/images/sprite_oong.gif"));//รูป Enemy
+        sprite.setEnemy_damage(new ImageIcon("src/images/sprite_oong_dmg.png"));//รูป Enemy
         health.setHP(3);
+        speed.setSpeed(100);
         text1 = new JLabel(words[random.getRandomNumberInRange(0, 978)]);
         text2 = new JLabel(words[random.getRandomNumberInRange(0, 978)]);
         text3 = new JLabel(words[random.getRandomNumberInRange(0, 978)]);
         scr = new JLabel("SCORE : " + score + "");//คะแนน
         background_label = new JLabel(bg);//เอารูปใส่JLabel game_over
         answer = new JLabel();
-        endSCENE = new JLabel(game_over);
+        endSCENE = new JLabel(end.getGame_over());
         img_HP1 = new JLabel(health.getImageHP());
         img_HP2 = new JLabel(health.getImageHP());
         img_HP3 = new JLabel(health.getImageHP());
         img_enemy = new JLabel(sprite.getEnemy());//เอารูปใส่JLabel
         img_player = new JLabel(sprite.getPlayer());//เอารูปใส่JLabel
-        btn_retry = new JButton(img_retry);
-        btn_menu = new JButton(img_menu);
+        btn_retry = new JButton(end.getImg_retry());
+        btn_menu = new JButton(end.getImg_menu());
 
         fr.setSize(1100, 650);//จัดขนาดของwindow
 
@@ -112,7 +114,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
     public void run() {
         try {
             while (health.getHP() != 0) {
-                Thread.sleep(speed);
+                Thread.sleep(speed.getSpeed());
                 text1.setBounds(potX[0], potY[0], 1000, 250);
                 text2.setBounds(potX[1], potY[1], 1000, 250);
                 text3.setBounds(potX[2], potY[2], 1000, 250);
@@ -124,8 +126,8 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
                     score += 100;
                     scr.setText("SCORE : " + score + "");
                     potX[3] = 525;
-                    if (speed > 40) {
-                        speed--;
+                    if (speed.getSpeed() > 40) {
+                        speed.setSpeed(speed.getSpeed()-1);
                     }
                     answer.setText("");
                 }
@@ -136,8 +138,8 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
                     score += 100;
                     scr.setText("SCORE : " + score + "");
                     potX[3] = 525;
-                    if (speed > 40) {
-                        speed--;
+                    if (speed.getSpeed() > 40) {
+                        speed.setSpeed(speed.getSpeed()-1);
                     }
                     answer.setText("");
                 }
@@ -147,8 +149,8 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
                     score += 100;
                     scr.setText("SCORE : " + score + "");
                     potX[3] = 525;
-                    if (speed > 40) {
-                        speed--;
+                    if (speed.getSpeed() > 40) {
+                        speed.setSpeed(speed.getSpeed()-1);
                     }
                     answer.setText("");
                 }
@@ -235,15 +237,11 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
         btn_retry.setBounds(1000, 1000, 215, 73);
         btn_menu.setBounds(1000, 1000, 215, 73);
         endSCENE.setBounds(1000, 1000, 1000, 250);
-        
         img_player.setIcon(sprite.getPlayer());
         scr.setText("SCORE : " +score + "");
         potX[3] = 525;
         answer.setBounds(potX[3], 450, 500, 200);
         answer.setText("");
-        
-
-
     }
 
     public void actionPerformed(ActionEvent ae) {
@@ -262,12 +260,6 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
             fr.dispose();
         }
     }
-
-
-    public static void setSpeed(int speed) {
-        MyMap.speed = speed;
-    }
-
     @Override
     public void keyPressed(KeyEvent ke) {
         char ch;
