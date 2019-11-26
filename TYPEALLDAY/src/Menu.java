@@ -1,6 +1,10 @@
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 public class Menu extends JPanel implements Runnable, ActionListener {
@@ -13,10 +17,13 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     private speed speed = new speed();
     private int x = -168;
     private JLabel header = new JLabel("- HOW TO PLAY -");
-    private int[] change_color = {255,0,0};
+    private int[] change_color = {255, 0, 0};
     private int i = 0;
+    private Font pixelMplus;
+
     public Menu() {
         fr = new JFrame("TypeAllDay");
+
         Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
         p2 = new JPanel();
         p3 = new JPanel();
@@ -97,8 +104,8 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         fr.add(btn_B);
         fr.add(header);
         fr.add(lb_bg);
-        
-        header.setFont(new Font("Comic Sans MS", Font.BOLD, 35));
+
+        header.setFont(pixelMplus);
         header.setForeground(new Color(change_color[0], change_color[1], change_color[2]));
         fr.setLocationRelativeTo(null);
         lb_bg.setBounds(x, 0, 1000, 630);
@@ -113,10 +120,10 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         // ไม่มีพื้นหลังปุ่ม
 
         img_bg.setBounds(x, 0, 1000, 630);    //กำหนดตำแหน่งและขนาด 
-        header.setBounds(90, 20, 347, 159);   //กำหนดตำแหน่งและขนาด
+        header.setBounds(75, 20, 500, 159);   //กำหนดตำแหน่งและขนาด
         btn_B.setBounds(115, 410, 270, 97);
 //        p1.setBounds(630, 100, 500, 500);
-        con1.setBounds(5, 125, 500, 200); //กำหนดตำแน่งและขนาด
+        con1.setBounds(0, 125, 500, 200); //กำหนดตำแน่งและขนาด
         con2.setBounds(5, 250, 500, 200);  //กำหนดตำแน่งและขนาด
 
         btn_B.addActionListener(this);
@@ -128,33 +135,36 @@ public class Menu extends JPanel implements Runnable, ActionListener {
 
         try {
             while (true) {
+                pixelMplus = Font.createFont(Font.TRUETYPE_FONT, new File("src/font/VCR_OSD_MONO_1.001.ttf")).deriveFont(40f);
+                GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/font/VCR_OSD_MONO_1.001.ttf")));
                 Thread.sleep(10);
                 lb_bg.setBounds(x, 0, 1000, 630);
                 x -= 5;
-                 if (change_color[0] >= 255 && change_color[1] < 255 && change_color[2] == 0) {
+                if (change_color[0] >= 255 && change_color[1] < 255 && change_color[2] == 0) {
                     change_color[1]++;
-                }
-                 else if (change_color[0] != 0 && change_color[1] >= 255 && change_color[2] == 0) {
+                } else if (change_color[0] != 0 && change_color[1] >= 255 && change_color[2] == 0) {
                     change_color[0]--;
-                }
-                 else if (change_color[0] == 0 && change_color[1] >= 255 && change_color[2] < 255) {
+                } else if (change_color[0] == 0 && change_color[1] >= 255 && change_color[2] < 255) {
                     change_color[2]++;
-                }
-                 else if (change_color[0] == 0 && change_color[1] != 0 && change_color[2] >= 255) {
+                } else if (change_color[0] == 0 && change_color[1] != 0 && change_color[2] >= 255) {
                     change_color[1]--;
-                }
-                 else if (change_color[0] < 255 && change_color[1] == 0 && change_color[2] >= 255) {
+                } else if (change_color[0] < 255 && change_color[1] == 0 && change_color[2] >= 255) {
                     change_color[0]++;
-                }
-                 else if (change_color[0] >= 255 && change_color[1] == 0 && change_color[2] != 0) {
+                } else if (change_color[0] >= 255 && change_color[1] == 0 && change_color[2] != 0) {
                     change_color[2]--;
                 }
                 header.setForeground(new Color(change_color[0], change_color[1], change_color[2]));
                 if (x <= -506) {
                     x = -168;
                 }
+                
             }
         } catch (InterruptedException e) {
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FontFormatException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
         repaint();
     }
