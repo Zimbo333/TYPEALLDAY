@@ -14,7 +14,6 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     private ImageIcon i1, i2, i3, bg, i4;
     private JLabel lb1, logo, lb_bg;
     private JButton btn1, btn2, btn3, btn_B;
-    private speed speed = new speed();
     private int x = -168;
     private JLabel header = new JLabel("- HOW TO PLAY -");
     private int[] change_color = {255, 0, 0};
@@ -181,7 +180,6 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         }
         if (ae.getSource() == btn2) {
             
-            System.out.println(speed.getSpeed());
             MyMap Map = new MyMap();
             Map.setSpeed(50);
             Map.reset();
