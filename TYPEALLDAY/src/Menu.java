@@ -17,24 +17,20 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     private int x_background_move = -168;
     private JLabel header = new JLabel("- HOW TO PLAY -");
     private int[] change_color = {255, 0, 0};
-    private int i = 0;
     private Font pixelMplus;
 
     public Menu() {
         fr = new JFrame("TypeAllDay");
 
         Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
-        p2 = new JPanel();
-        p3 = new JPanel();
-
+        i1 = new ImageIcon("src/images/logo.png");
         lb1 = new JLabel(i1);
         bg = new ImageIcon("src/images/bg_2.jpg");
-        i1 = new ImageIcon("src/images/logo.png");
         i2 = new ImageIcon("src/images/button1.png");
         i3 = new ImageIcon("src/images/button2.png");
         i4 = new ImageIcon("src/images/howtoplay.png");
 
-        p1 = new JPanel();
+
         fr.setSize(500, 630);
         lb_bg = new JLabel(bg);
         logo = new JLabel(i1);
@@ -49,19 +45,19 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         fr.add(btn1);
         fr.add(btn2);
         fr.add(btn3);
-        fr.add(p1);
+
         fr.add(lb_bg);
 
-//        fr.add(p1);
+
         lb_bg.setBounds(x_background_move, 0, 1000, 630);    //กำหนดตำแหน่งและขนาด 
         logo.setBounds(70, 70, 347, 159);   //กำหนดตำแหน่งและขนาด
 
-//        p1.setBounds(630, 100, 500, 500);
+
         btn1.setBounds(100, 250, 251, 103); //กำหนดตำแน่งและขนาด
         btn2.setBounds(130, 350, 249, 97);  //กำหนดตำแน่งและขนาด
         btn3.setBounds(80, 440, 270, 97);
 
-//        fr.setLayout(new FlowLayout());
+
         btn1.setBorder(BorderFactory.createEmptyBorder()); //ทำให้ปุ่มไม่มีขอบ
         btn1.setContentAreaFilled(false);                  // ไม่มีพื้นหลังปุ่ม
 
@@ -115,7 +111,6 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         btn_B.setBorder(BorderFactory.createEmptyBorder());//ทำให้ปุ่มไม่มีขอบ
         btn_B.setContentAreaFilled(false);
 
-
         Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
         btn_B.setCursor(cursor);
         // ไม่มีพื้นหลังปุ่ม
@@ -159,7 +154,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
                 if (x_background_move <= -506) {
                     x_background_move = -168;
                 }
-                
+
             }
         } catch (InterruptedException e) {
         } catch (IOException ex) {
@@ -179,7 +174,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
             fr.dispose();
         }
         if (ae.getSource() == btn2) {
-            
+
             MyMap Map = new MyMap();
             Map.setSpeed(50);
             Map.reset();
