@@ -49,21 +49,6 @@ public class sprite{
         this.player = player;
     }
 
-    void setPlayer(String srcimagessprite_white_oonggif) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void setEnemy(String srcimagessprite_oonggif) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void setEnemy_damage(String srcimagessprite_oong_dmgpng) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void setPlayer_damaged(String srcimagessprite_white_oong_dmgpng) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 
 
