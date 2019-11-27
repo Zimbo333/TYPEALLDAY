@@ -14,7 +14,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     private ImageIcon i1, i2, i3, bg, i4;
     private JLabel lb1, logo, lb_bg;
     private JButton btn1, btn2, btn3, btn_B;
-    private int x = -168;
+    private int x_background_move = -168;
     private JLabel header = new JLabel("- HOW TO PLAY -");
     private int[] change_color = {255, 0, 0};
     private int i = 0;
@@ -53,7 +53,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         fr.add(lb_bg);
 
 //        fr.add(p1);
-        lb_bg.setBounds(x, 0, 1000, 630);    //กำหนดตำแหน่งและขนาด 
+        lb_bg.setBounds(x_background_move, 0, 1000, 630);    //กำหนดตำแหน่งและขนาด 
         logo.setBounds(70, 70, 347, 159);   //กำหนดตำแหน่งและขนาด
 
 //        p1.setBounds(630, 100, 500, 500);
@@ -107,7 +107,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         header.setFont(pixelMplus);
         header.setForeground(new Color(change_color[0], change_color[1], change_color[2]));
         fr.setLocationRelativeTo(null);
-        lb_bg.setBounds(x, 0, 1000, 630);
+        lb_bg.setBounds(x_background_move, 0, 1000, 630);
         fr.setVisible(true);
         fr.setResizable(false);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,7 +120,7 @@ public class Menu extends JPanel implements Runnable, ActionListener {
         btn_B.setCursor(cursor);
         // ไม่มีพื้นหลังปุ่ม
 
-        img_bg.setBounds(x, 0, 1000, 630);    //กำหนดตำแหน่งและขนาด 
+        img_bg.setBounds(x_background_move, 0, 1000, 630);    //กำหนดตำแหน่งและขนาด 
         header.setBounds(75, 20, 500, 159);   //กำหนดตำแหน่งและขนาด
         btn_B.setBounds(115, 410, 270, 97);
 //        p1.setBounds(630, 100, 500, 500);
@@ -140,8 +140,8 @@ public class Menu extends JPanel implements Runnable, ActionListener {
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/font/VCR_OSD_MONO_1.001.ttf")));
                 Thread.sleep(10);
-                lb_bg.setBounds(x, 0, 1000, 630);
-                x -= 5;
+                lb_bg.setBounds(x_background_move, 0, 1000, 630);
+                x_background_move -= 5;
                 if (change_color[0] >= 255 && change_color[1] < 255 && change_color[2] == 0) {
                     change_color[1]++;
                 } else if (change_color[0] != 0 && change_color[1] >= 255 && change_color[2] == 0) {
@@ -156,8 +156,8 @@ public class Menu extends JPanel implements Runnable, ActionListener {
                     change_color[2]--;
                 }
                 header.setForeground(new Color(change_color[0], change_color[1], change_color[2]));
-                if (x <= -506) {
-                    x = -168;
+                if (x_background_move <= -506) {
+                    x_background_move = -168;
                 }
                 
             }
