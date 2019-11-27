@@ -115,6 +115,8 @@ public class Menu extends JPanel implements Runnable, ActionListener {
 
         btn_B.setBorder(BorderFactory.createEmptyBorder());//ทำให้ปุ่มไม่มีขอบ
         btn_B.setContentAreaFilled(false);
+
+
         Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
         btn_B.setCursor(cursor);
         // ไม่มีพื้นหลังปุ่ม
@@ -172,14 +174,16 @@ public class Menu extends JPanel implements Runnable, ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btn1) {
-            speed.setSpeed(100);
             MyMap Map = new MyMap();
+            Map.setSpeed(100);
             Map.reset();
             fr.dispose();
         }
         if (ae.getSource() == btn2) {
-            speed.setSpeed(50);
+            
+            System.out.println(speed.getSpeed());
             MyMap Map = new MyMap();
+            Map.setSpeed(50);
             Map.reset();
             fr.dispose();
         }

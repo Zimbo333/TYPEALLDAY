@@ -11,7 +11,6 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
     private HP health = new HP();
     private random random = new random();
     private endgame end = new endgame();
-    private speed speed = new speed();
     private String[] backG = {"bg", "bg_1", "bg_2"}; //เอาไว้ randoms พื้นหลังตอนเปิดเกม
     private int i = random.getRandomNumberInRange(0, 2); //เลขที่ได้จาการ Random
     private int potX[] = {random.getRandomNumberInRange(100, 700), random.getRandomNumberInRange(100, 700), random.getRandomNumberInRange(100, 700), 525};
@@ -22,6 +21,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
     private JLabel text1, text2, text3, endSCENE, img_HP1, img_HP2, img_HP3, img_enemy, img_player, background_label, scr, answer;
     private JButton btn_retry, btn_menu;
     private MyMap Map;
+    static int speed = 100;
 
     public MyMap() {
         fr = new JFrame();
@@ -36,7 +36,6 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
         sprite.setEnemy(new ImageIcon("src/images/sprite_oong.gif"));//รูป Enemy
         sprite.setEnemy_damage(new ImageIcon("src/images/sprite_oong_dmg.png"));//รูป Enemy
         health.setHP(3);
-        speed.setSpeed(100);
         text1 = new JLabel(words[random.getRandomNumberInRange(0, 978)]);
         text2 = new JLabel(words[random.getRandomNumberInRange(0, 978)]);
         text3 = new JLabel(words[random.getRandomNumberInRange(0, 978)]);
@@ -115,7 +114,7 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
         try {
             
             while (health.getHP() != 0) {
-                Thread.sleep(speed.getSpeed());
+                Thread.sleep(speed);
                 text1.setBounds(potX[0], potY[0], 1000, 250);
                 text2.setBounds(potX[1], potY[1], 1000, 250);
                 text3.setBounds(potX[2], potY[2], 1000, 250);
@@ -126,8 +125,8 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
                     score += 100;
                     scr.setText("SCORE : " + score + "");
                     potX[3] = 525;
-                    if (speed.getSpeed() > 40) {
-                        speed.setSpeed(speed.getSpeed()-1);
+                    if (speed > 40) {
+                        speed--;
                     }
                     answer.setText("");
                 }
@@ -138,8 +137,8 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
                     score += 100;
                     scr.setText("SCORE : " + score + "");
                     potX[3] = 525;
-                    if (speed.getSpeed() > 40) {
-                        speed.setSpeed(speed.getSpeed()-1);
+                    if (speed > 40) {
+                        speed--;
                     }
                     answer.setText("");
                 }
@@ -149,8 +148,8 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
                     score += 100;
                     scr.setText("SCORE : " + score + "");
                     potX[3] = 525;
-                    if (speed.getSpeed() > 40) {
-                        speed.setSpeed(speed.getSpeed()-1);
+                    if (speed > 40) {
+                        speed--;
                     }
                     answer.setText("");
                 }
@@ -243,7 +242,9 @@ public class MyMap extends JPanel implements ActionListener, KeyListener, Common
         answer.setBounds(potX[3], 450, 500, 200);
         answer.setText("");
     }
-
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btn_retry) {
             score = 0;
